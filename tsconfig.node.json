@@ -8,6 +8,10 @@
 		"rsbuild-main.config.ts"
 	],
 	"compilerOptions": {
-		"composite": true
+		"composite": true,
+		"baseUrl": "./src",
+		"paths": {
+			"@/*": ["./*"]
+		}
 	}
 }
