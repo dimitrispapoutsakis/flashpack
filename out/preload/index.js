@@ -234,15 +234,15 @@
 	// This entry needs to be wrapped in an IIFE because it needs to be isolated against other modules in the chunk.
 	(() => {
 		__webpack_require__.r(__webpack_exports__);
-		/* ESM import */ var electron__WEBPACK_IMPORTED_MODULE_0__ =
-			__webpack_require__("electron");
-		/* ESM import */ var electron__WEBPACK_IMPORTED_MODULE_0___default =
-			/*#__PURE__*/ __webpack_require__.n(
-				electron__WEBPACK_IMPORTED_MODULE_0__,
-			);
-		/* ESM import */ var _electron_toolkit_preload__WEBPACK_IMPORTED_MODULE_1__ =
+		/* ESM import */ var _electron_toolkit_preload__WEBPACK_IMPORTED_MODULE_0__ =
 			__webpack_require__(
 				"./node_modules/@electron-toolkit/preload/dist/index.mjs",
+			);
+		/* ESM import */ var electron__WEBPACK_IMPORTED_MODULE_1__ =
+			__webpack_require__("electron");
+		/* ESM import */ var electron__WEBPACK_IMPORTED_MODULE_1___default =
+			/*#__PURE__*/ __webpack_require__.n(
+				electron__WEBPACK_IMPORTED_MODULE_1__,
 			);
 
 		// Custom APIs for renderer
@@ -252,11 +252,11 @@
 		// just add to the DOM global.
 		if (process.contextIsolated) {
 			try {
-				electron__WEBPACK_IMPORTED_MODULE_0__.contextBridge.exposeInMainWorld(
+				electron__WEBPACK_IMPORTED_MODULE_1__.contextBridge.exposeInMainWorld(
 					"electron",
-					_electron_toolkit_preload__WEBPACK_IMPORTED_MODULE_1__.electronAPI,
+					_electron_toolkit_preload__WEBPACK_IMPORTED_MODULE_0__.electronAPI,
 				);
-				electron__WEBPACK_IMPORTED_MODULE_0__.contextBridge.exposeInMainWorld(
+				electron__WEBPACK_IMPORTED_MODULE_1__.contextBridge.exposeInMainWorld(
 					"api",
 					api,
 				);
@@ -264,10 +264,10 @@
 				console.error(error);
 			}
 		} else {
-			// @ts-ignore (define in dts)
+			// @ts-expect-error (define in dts)
 			window.electron =
-				_electron_toolkit_preload__WEBPACK_IMPORTED_MODULE_1__.electronAPI;
-			// @ts-ignore (define in dts)
+				_electron_toolkit_preload__WEBPACK_IMPORTED_MODULE_0__.electronAPI;
+			// @ts-expect-error (define in dts)
 			window.api = api;
 		}
 	})();

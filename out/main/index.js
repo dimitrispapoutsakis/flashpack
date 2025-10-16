@@ -256,20 +256,20 @@
 	// This entry needs to be wrapped in an IIFE because it needs to be isolated against other modules in the chunk.
 	(() => {
 		__webpack_require__.r(__webpack_exports__);
-		/* ESM import */ var electron__WEBPACK_IMPORTED_MODULE_0__ =
-			__webpack_require__("electron");
-		/* ESM import */ var electron__WEBPACK_IMPORTED_MODULE_0___default =
-			/*#__PURE__*/ __webpack_require__.n(
-				electron__WEBPACK_IMPORTED_MODULE_0__,
-			);
-		/* ESM import */ var path__WEBPACK_IMPORTED_MODULE_1__ =
-			__webpack_require__("path");
-		/* ESM import */ var path__WEBPACK_IMPORTED_MODULE_1___default =
-			/*#__PURE__*/ __webpack_require__.n(path__WEBPACK_IMPORTED_MODULE_1__);
-		/* ESM import */ var _electron_toolkit_utils__WEBPACK_IMPORTED_MODULE_2__ =
+		/* ESM import */ var _electron_toolkit_utils__WEBPACK_IMPORTED_MODULE_0__ =
 			__webpack_require__(
 				"./node_modules/@electron-toolkit/utils/dist/index.mjs",
 			);
+		/* ESM import */ var electron__WEBPACK_IMPORTED_MODULE_1__ =
+			__webpack_require__("electron");
+		/* ESM import */ var electron__WEBPACK_IMPORTED_MODULE_1___default =
+			/*#__PURE__*/ __webpack_require__.n(
+				electron__WEBPACK_IMPORTED_MODULE_1__,
+			);
+		/* ESM import */ var path__WEBPACK_IMPORTED_MODULE_2__ =
+			__webpack_require__("path");
+		/* ESM import */ var path__WEBPACK_IMPORTED_MODULE_2___default =
+			/*#__PURE__*/ __webpack_require__.n(path__WEBPACK_IMPORTED_MODULE_2__);
 		/* ESM import */ var _resources_icon_png_asset__WEBPACK_IMPORTED_MODULE_3__ =
 			__webpack_require__("./resources/icon.png?asset");
 		function _define_property(obj, key, value) {
@@ -336,7 +336,7 @@
 
 		function createWindow() {
 			// Create the browser window.
-			var mainWindow = new electron__WEBPACK_IMPORTED_MODULE_0__.BrowserWindow(
+			var mainWindow = new electron__WEBPACK_IMPORTED_MODULE_1__.BrowserWindow(
 				_object_spread_props(
 					_object_spread(
 						{
@@ -353,7 +353,7 @@
 					),
 					{
 						webPreferences: {
-							preload: (0, path__WEBPACK_IMPORTED_MODULE_1__.join)(
+							preload: (0, path__WEBPACK_IMPORTED_MODULE_2__.join)(
 								__dirname,
 								"../preload/index.js",
 							),
@@ -367,7 +367,7 @@
 				mainWindow.show();
 			});
 			mainWindow.webContents.setWindowOpenHandler((details) => {
-				electron__WEBPACK_IMPORTED_MODULE_0__.shell.openExternal(details.url);
+				electron__WEBPACK_IMPORTED_MODULE_1__.shell.openExternal(details.url);
 				return {
 					action: "deny",
 				};
@@ -375,13 +375,13 @@
 			// HMR for renderer base on electron-rsbuild cli.
 			// Load the remote URL for development or the local html file for production.
 			if (
-				_electron_toolkit_utils__WEBPACK_IMPORTED_MODULE_2__.is.dev &&
+				_electron_toolkit_utils__WEBPACK_IMPORTED_MODULE_0__.is.dev &&
 				process.env["ELECTRON_RENDERER_URL"]
 			) {
 				mainWindow.loadURL(process.env["ELECTRON_RENDERER_URL"]);
 			} else {
 				mainWindow.loadFile(
-					(0, path__WEBPACK_IMPORTED_MODULE_1__.join)(
+					(0, path__WEBPACK_IMPORTED_MODULE_2__.join)(
 						__dirname,
 						"../renderer/index.html",
 					),
@@ -391,24 +391,24 @@
 		// This method will be called when Electron has finished
 		// initialization and is ready to create browser windows.
 		// Some APIs can only be used after this event occurs.
-		electron__WEBPACK_IMPORTED_MODULE_0__.app.whenReady().then(() => {
+		electron__WEBPACK_IMPORTED_MODULE_1__.app.whenReady().then(() => {
 			// Set app user model id for windows
-			_electron_toolkit_utils__WEBPACK_IMPORTED_MODULE_2__.electronApp.setAppUserModelId(
+			_electron_toolkit_utils__WEBPACK_IMPORTED_MODULE_0__.electronApp.setAppUserModelId(
 				"com.electron",
 			);
 			// Default open or close DevTools by F12 in development
 			// and ignore CommandOrControl + R in production.
 			// see https://github.com/alex8088/electron-toolkit/tree/master/packages/utils
-			electron__WEBPACK_IMPORTED_MODULE_0__.app.on(
+			electron__WEBPACK_IMPORTED_MODULE_1__.app.on(
 				"browser-window-created",
 				(_, window) => {
-					_electron_toolkit_utils__WEBPACK_IMPORTED_MODULE_2__.optimizer.watchWindowShortcuts(
+					_electron_toolkit_utils__WEBPACK_IMPORTED_MODULE_0__.optimizer.watchWindowShortcuts(
 						window,
 					);
 				},
 			);
 			// IPC test
-			electron__WEBPACK_IMPORTED_MODULE_0__.ipcMain.on("ping", (event) => {
+			electron__WEBPACK_IMPORTED_MODULE_1__.ipcMain.on("ping", (event) => {
 				event.reply("pong", {
 					message: "copy that.",
 					time: new Date().getTime(),
@@ -416,11 +416,11 @@
 				console.log("pong");
 			});
 			createWindow();
-			electron__WEBPACK_IMPORTED_MODULE_0__.app.on("activate", () => {
+			electron__WEBPACK_IMPORTED_MODULE_1__.app.on("activate", () => {
 				// On macOS it's common to re-create a window in the app when the
 				// dock icon is clicked and there are no other windows open.
 				if (
-					electron__WEBPACK_IMPORTED_MODULE_0__.BrowserWindow.getAllWindows()
+					electron__WEBPACK_IMPORTED_MODULE_1__.BrowserWindow.getAllWindows()
 						.length === 0
 				)
 					createWindow();
@@ -429,9 +429,9 @@
 		// Quit when all windows are closed, except on macOS. There, it's common
 		// for applications and their menu bar to stay active until the user quits
 		// explicitly with Cmd + Q.
-		electron__WEBPACK_IMPORTED_MODULE_0__.app.on("window-all-closed", () => {
+		electron__WEBPACK_IMPORTED_MODULE_1__.app.on("window-all-closed", () => {
 			if (process.platform !== "darwin") {
-				electron__WEBPACK_IMPORTED_MODULE_0__.app.quit();
+				electron__WEBPACK_IMPORTED_MODULE_1__.app.quit();
 			}
 		}); // In this file you can include the rest of your app"s specific main process
 		// code. You can also put them in separate files and require them here.

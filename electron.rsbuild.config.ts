@@ -1,5 +1,6 @@
 import { defineConfig } from "@rsbuild/core";
 import { pluginReact } from "@rsbuild/plugin-react";
+import { pluginSass } from "@rsbuild/plugin-sass";
 import { resolve } from "path";
 
 export default defineConfig({
@@ -11,7 +12,7 @@ export default defineConfig({
 		preload: {},
 		// renderer
 		renderer: {
-			plugins: [pluginReact()],
+			plugins: [pluginReact(), pluginSass()],
 		},
 	},
 });

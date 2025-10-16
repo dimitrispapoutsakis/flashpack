@@ -1,66 +1,21 @@
-import { useEffect, useState } from "react";
-import background from "./assets/background-lines.png";
-import electronRsbuildLogo from "./assets/electron-rsbuild-logo.svg";
-import Versions from "./components/Versions";
-
-function App(): JSX.Element {
-	const ipcHandle = (): void => window.electron.ipcRenderer.send("ping");
-	const [mainMessage, setMainMessage] = useState({
-		message: "",
-		time: 0,
-	});
-
-	const onReceiver = (_, data: any) => {
-		setMainMessage(data);
-	};
-
-	useEffect(() => {
-		window.electron.ipcRenderer.on("pong", onReceiver);
-		return () => {
-			window.electron.ipcRenderer.removeListener("pong", onReceiver);
-		};
-	}, []);
-
+const App = () => {
 	return (
-		<>
-			<img alt="logo" className="logo" src={electronRsbuildLogo} />
-			<img alt="logo" className="background" src={background} />
-
-			<div className="creator">Powered by electron-rsbuild</div>
-			<div className="text">
-				Build an Electron + Rsbuild app with{" "}
-				<span className="react">React</span>
-				&nbsp;and <span className="ts">TypeScript</span>
-			</div>
-			<p className="tip">
-				Please try pressing <code>F12</code> to open the devTool
-			</p>
-			<div className="actions">
-				<div className="action">
-					<a
-						href="https://electron-rsbuild.org/"
-						target="_blank"
-						rel="noreferrer"
-					>
-						Documentation
-					</a>
-				</div>
-				<div className="action">
-					<a target="_blank" rel="noreferrer" onClick={ipcHandle}>
-						Send IPC
-					</a>
+		<div className="min-h-screen bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center">
+			<div className="bg-white rounded-lg shadow-xl p-8 max-w-md w-full mx-4">
+				<h1 className="text-3xl font-bold text-gray-800 mb-4 text-center">
+					Welcome to Flashpack
+				</h1>
+				<p className="text-gray-600 text-center mb-6">
+					Tailwind CSS is now set up and working! 🎉
+				</p>
+				<div className="flex justify-center">
+					<button className="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-lg transition-colors duration-200">
+						Get Started
+					</button>
 				</div>
 			</div>
-			{mainMessage?.message && (
-				<div className="action">
-					<a target="_blank" rel="noreferrer" onClick={ipcHandle}>
-						{mainMessage?.time as number}: {mainMessage?.message}
-					</a>
-				</div>
-			)}
-			<Versions></Versions>
-		</>
+		</div>
 	);
-}
+};
 
 export default App;
