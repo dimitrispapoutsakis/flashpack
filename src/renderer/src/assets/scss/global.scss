@@ -3,9 +3,9 @@
 @custom-variant dark (&:is(.dark *));
 
 :root {
-  --background: #17181c; // dark (not black) material background
+  --background: #1f1f1f; // dark (not black) material background
   --foreground: oklch(0.95 0.01 321.50);
-  --card: oklch(0.22 0.02 322.13);
+  --card: hsl(0 0% 9%;);
   --card-foreground: oklch(0.95 0.01 321.50);
   --popover: oklch(0.22 0.02 322.13);
   --popover-foreground: oklch(0.95 0.01 321.50);

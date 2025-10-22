@@ -6,8 +6,8 @@ import icon from "../../resources/icon.png?asset";
 function createWindow(): void {
 	// Create the browser window.
 	const mainWindow = new BrowserWindow({
-		width: 900,
-		height: 670,
+		width: 350,
+		height: 400,
 		show: false,
 		autoHideMenuBar: true,
 		...(process.platform === "linux" ? { icon } : {}),
@@ -15,6 +15,7 @@ function createWindow(): void {
 			preload: join(__dirname, "../preload/index.js"),
 			sandbox: false,
 		},
+		title: "Flashplack",
 	});
 
 	// mainWindow.title = 'Electron-Rsbuild app'

@@ -293,8 +293,8 @@ function _object_spread_props(target, source) {
 function createWindow() {
     // Create the browser window.
     var mainWindow = new electron__WEBPACK_IMPORTED_MODULE_1__.BrowserWindow(_object_spread_props(_object_spread({
-        width: 900,
-        height: 670,
+        width: 350,
+        height: 400,
         show: false,
         autoHideMenuBar: true
     }, process.platform === "linux" ? {
@@ -303,7 +303,8 @@ function createWindow() {
         webPreferences: {
             preload: (0,path__WEBPACK_IMPORTED_MODULE_2__.join)(__dirname, "../preload/index.js"),
             sandbox: false
-        }
+        },
+        title: "Flashplack"
     }));
     // mainWindow.title = 'Electron-Rsbuild app'
     mainWindow.on("ready-to-show", function() {
