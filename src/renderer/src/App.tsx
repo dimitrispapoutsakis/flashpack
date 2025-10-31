@@ -1,17 +1,19 @@
 import { useEffect } from "react";
 import { Button } from "@/components/animate-ui/components/buttons/button";
+import Particles from "@/components/Particles/Particles";
 import { TitleBar } from "./components/TitleBar";
 
 const App = () => {
-	useEffect(() => {}, []);
-
 	return (
-		<div className="flex flex-col h-screen bg-background">
-			<TitleBar />
-			<div className="flex-1 flex justify-center items-center">
-				<Button>Flash</Button>
+		<>
+			<Particles />
+			<div className="flex flex-col h-screen bg-background">
+				<TitleBar />
+				<div className="flex-1 flex justify-center items-center">
+					<Button>Flash</Button>
+				</div>
 			</div>
-		</div>
+		</>
 	);
 };
 

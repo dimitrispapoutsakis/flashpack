@@ -297,8 +297,8 @@ function createWindow() {
 			console.log(res);
 		});  */ // Create the browser window.
     var mainWindow = new electron__WEBPACK_IMPORTED_MODULE_1__.BrowserWindow(_object_spread_props(_object_spread({
-        width: 350,
-        height: 400,
+        width: 1000,
+        height: 650,
         show: false,
         autoHideMenuBar: true,
         frame: false

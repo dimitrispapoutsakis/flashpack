@@ -11,8 +11,8 @@ function createWindow(): void {
 		});  */
 	// Create the browser window.
 	const mainWindow = new BrowserWindow({
-		width: 350,
-		height: 400,
+		width: 1000,
+		height: 650,
 		show: false,
 		autoHideMenuBar: true,
 		frame: false,
