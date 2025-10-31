@@ -190,7 +190,13 @@ __webpack_require__.r(__webpack_exports__);
 
 
 // Custom APIs for renderer
-const api = {};
+const api = {
+    window: {
+        minimize: ()=>_electron_toolkit_preload__WEBPACK_IMPORTED_MODULE_0__.electronAPI.ipcRenderer.send("window-minimize"),
+        maximize: ()=>_electron_toolkit_preload__WEBPACK_IMPORTED_MODULE_0__.electronAPI.ipcRenderer.send("window-maximize"),
+        close: ()=>_electron_toolkit_preload__WEBPACK_IMPORTED_MODULE_0__.electronAPI.ipcRenderer.send("window-close")
+    }
+};
 // Use `contextBridge` APIs to expose Electron APIs to
 // renderer only if context isolation is enabled, otherwise
 // just add to the DOM global.

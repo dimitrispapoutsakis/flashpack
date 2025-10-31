@@ -290,13 +290,18 @@ function _object_spread_props(target, source) {
 
 
 
+//  import { Installer } from "@webos-tools/cli/APIs";
+// console.log(Installer);
 function createWindow() {
-    // Create the browser window.
+    /* 	Installer.list().then((res) => {
+			console.log(res);
+		});  */ // Create the browser window.
     var mainWindow = new electron__WEBPACK_IMPORTED_MODULE_1__.BrowserWindow(_object_spread_props(_object_spread({
         width: 350,
         height: 400,
         show: false,
-        autoHideMenuBar: true
+        autoHideMenuBar: true,
+        frame: false
     }, process.platform === "linux" ? {
         icon: _resources_icon_png_asset__WEBPACK_IMPORTED_MODULE_3__
     } : {}), {
@@ -343,6 +348,24 @@ electron__WEBPACK_IMPORTED_MODULE_1__.app.whenReady().then(function() {
             time: new Date().getTime()
         });
         console.log("pong");
+    });
+    // Window controls
+    electron__WEBPACK_IMPORTED_MODULE_1__.ipcMain.on("window-minimize", function(event) {
+        var window = electron__WEBPACK_IMPORTED_MODULE_1__.BrowserWindow.fromWebContents(event.sender);
+        console.log(window, "here");
+        window === null || window === void 0 ? void 0 : window.minimize();
+    });
+    electron__WEBPACK_IMPORTED_MODULE_1__.ipcMain.on("window-maximize", function(event) {
+        var window = electron__WEBPACK_IMPORTED_MODULE_1__.BrowserWindow.fromWebContents(event.sender);
+        if (window === null || window === void 0 ? void 0 : window.isMaximized()) {
+            window.unmaximize();
+        } else {
+            window === null || window === void 0 ? void 0 : window.maximize();
+        }
+    });
+    electron__WEBPACK_IMPORTED_MODULE_1__.ipcMain.on("window-close", function(event) {
+        var window = electron__WEBPACK_IMPORTED_MODULE_1__.BrowserWindow.fromWebContents(event.sender);
+        window === null || window === void 0 ? void 0 : window.close();
     });
     createWindow();
     electron__WEBPACK_IMPORTED_MODULE_1__.app.on("activate", function() {

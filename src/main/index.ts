@@ -3,13 +3,19 @@ import { app, BrowserWindow, ipcMain, shell } from "electron";
 import { join } from "path";
 import icon from "../../resources/icon.png?asset";
 
+//  import { Installer } from "@webos-tools/cli/APIs";
+// console.log(Installer);
 function createWindow(): void {
+	/* 	Installer.list().then((res) => {
+			console.log(res);
+		});  */
 	// Create the browser window.
 	const mainWindow = new BrowserWindow({
 		width: 350,
 		height: 400,
 		show: false,
 		autoHideMenuBar: true,
+		frame: false,
 		...(process.platform === "linux" ? { icon } : {}),
 		webPreferences: {
 			preload: join(__dirname, "../preload/index.js"),
@@ -55,6 +61,27 @@ app.whenReady().then(() => {
 	ipcMain.on("ping", (event) => {
 		event.reply("pong", { message: "copy that.", time: new Date().getTime() });
 		console.log("pong");
+	});
+
+	// Window controls
+	ipcMain.on("window-minimize", (event) => {
+		const window = BrowserWindow.fromWebContents(event.sender);
+		console.log(window, "here");
+		window?.minimize();
+	});
+
+	ipcMain.on("window-maximize", (event) => {
+		const window = BrowserWindow.fromWebContents(event.sender);
+		if (window?.isMaximized()) {
+			window.unmaximize();
+		} else {
+			window?.maximize();
+		}
+	});
+
+	ipcMain.on("window-close", (event) => {
+		const window = BrowserWindow.fromWebContents(event.sender);
+		window?.close();
 	});
 
 	createWindow();
