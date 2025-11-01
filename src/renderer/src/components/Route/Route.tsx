@@ -22,12 +22,13 @@ const onboardingRoute = createRoute({
 	path: "/onboarding",
 	component: Onboarding, // The layout component
 });
-
-// const ipkNameRoute = createRoute({
-//   getParentRoute: () => postsRoute,
-//   path: 'create',
-// })
-
+/* 
+const ipkNameRoute = createRoute({
+	getParentRoute: () => rootRoute,
+	path: "/onboarding",
+	component: Onboarding, // The layout component
+});
+ */
 export const routeTree = rootRoute.addChildren([
 	// The pathless layout route has no path, only an id
 	// So its children will be nested under the pathless layout route
