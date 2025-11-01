@@ -10,7 +10,6 @@ const Particles = () => {
 	return (
 		<ReactParticles
 			init={particlesInit}
-			/* @ts-expect-error */
 			options={particlesOptions} // Ensure this function returns a valid config
 		/>
 	);

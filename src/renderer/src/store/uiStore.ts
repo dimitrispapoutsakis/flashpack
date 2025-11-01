@@ -6,6 +6,6 @@ interface IUiState {
 }
 
 export const useUiStore = create<IUiState>((set) => ({
-	selectedPlayer: "",
+	selectedPlayer: "Select Device",
 	setSelectedPlayer: (player) => set({ selectedPlayer: player }),
 }));
