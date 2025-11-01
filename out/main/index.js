@@ -239,13 +239,13 @@ __webpack_require__.r(__webpack_exports__);
 /* ESM import */var _electron_toolkit_utils__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__("./node_modules/@electron-toolkit/utils/dist/index.mjs");
 /* ESM import */var electron__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__("electron");
 /* ESM import */var electron__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(electron__WEBPACK_IMPORTED_MODULE_1__);
-/* ESM import */var path__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__("path");
-/* ESM import */var path__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(path__WEBPACK_IMPORTED_MODULE_2__);
+/* ESM import */var fs_promises__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__("fs/promises");
+/* ESM import */var fs_promises__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(fs_promises__WEBPACK_IMPORTED_MODULE_2__);
 /* ESM import */var os__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__("os");
 /* ESM import */var os__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(os__WEBPACK_IMPORTED_MODULE_3__);
-/* ESM import */var _resources_icon_png_asset__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__("./resources/icon.png?asset");
-/* ESM import */var fs_promises__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__("fs/promises");
-/* ESM import */var fs_promises__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(fs_promises__WEBPACK_IMPORTED_MODULE_5__);
+/* ESM import */var path__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__("path");
+/* ESM import */var path__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(path__WEBPACK_IMPORTED_MODULE_4__);
+/* ESM import */var _resources_icon_png_asset__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__("./resources/icon.png?asset");
 function _define_property(obj, key, value) {
     if (key in obj) {
         Object.defineProperty(obj, key, {
@@ -317,10 +317,10 @@ function createWindow() {
         autoHideMenuBar: true,
         frame: false
     }, process.platform === "linux" ? {
-        icon: _resources_icon_png_asset__WEBPACK_IMPORTED_MODULE_4__
+        icon: _resources_icon_png_asset__WEBPACK_IMPORTED_MODULE_5__
     } : {}), {
         webPreferences: {
-            preload: (0,path__WEBPACK_IMPORTED_MODULE_2__.join)(__dirname, "../preload/index.js"),
+            preload: (0,path__WEBPACK_IMPORTED_MODULE_4__.join)(__dirname, "../preload/index.js"),
             sandbox: false,
             contextIsolation: true
         },
@@ -341,7 +341,7 @@ function createWindow() {
     if (_electron_toolkit_utils__WEBPACK_IMPORTED_MODULE_0__.is.dev && process.env["ELECTRON_RENDERER_URL"]) {
         mainWindow.loadURL(process.env["ELECTRON_RENDERER_URL"]);
     } else {
-        mainWindow.loadFile((0,path__WEBPACK_IMPORTED_MODULE_2__.join)(__dirname, "../renderer/index.html"));
+        mainWindow.loadFile((0,path__WEBPACK_IMPORTED_MODULE_4__.join)(__dirname, "../renderer/index.html"));
     }
 }
 // This method will be called when Electron has finished
@@ -387,10 +387,10 @@ electron__WEBPACK_IMPORTED_MODULE_1__.app.whenReady().then(function() {
         return (0,os__WEBPACK_IMPORTED_MODULE_3__.homedir)();
     });
     electron__WEBPACK_IMPORTED_MODULE_1__.ipcMain.handle("get-hard-drive-dir", function() {
-        return (0,fs_promises__WEBPACK_IMPORTED_MODULE_5__.readdir)((0,os__WEBPACK_IMPORTED_MODULE_3__.homedir)());
+        return (0,fs_promises__WEBPACK_IMPORTED_MODULE_2__.readdir)((0,os__WEBPACK_IMPORTED_MODULE_3__.homedir)());
     });
-    electron__WEBPACK_IMPORTED_MODULE_1__.ipcMain.handle('get-webos-sdk-dir', function() {
-        return (0,path__WEBPACK_IMPORTED_MODULE_2__.join)((0,os__WEBPACK_IMPORTED_MODULE_3__.homedir)(), "dev", "webos", "ipks");
+    electron__WEBPACK_IMPORTED_MODULE_1__.ipcMain.handle("get-webos-sdk-dir", function() {
+        return (0,path__WEBPACK_IMPORTED_MODULE_4__.join)((0,os__WEBPACK_IMPORTED_MODULE_3__.homedir)(), "dev", "webos", "ipks");
     });
     createWindow();
     electron__WEBPACK_IMPORTED_MODULE_1__.app.on("activate", function() {
