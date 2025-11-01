@@ -67,7 +67,7 @@ const OnBoarding = ({ children }: IChildren) => {
 							}}
 							onClick={() => {
 								if (nextRoute?.path === "/dashboard") {
-									setUi('hasOnboarded', true);
+									setUi("hasOnboarded", true);
 								}
 							}}
 						>

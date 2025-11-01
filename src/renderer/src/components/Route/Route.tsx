@@ -1,10 +1,10 @@
 import { createRoute, Outlet } from "@tanstack/react-router";
 import App from "../../App";
+import Dashboard from "../Dashboard/Dashboard";
 import IpkDir from "../IpkDir/IpkDir";
 import IpkName from "../IpkName/IpkName";
 import SdkDir from "../SdkDir/SdkDir";
 import Welcome from "../Welcome/Welcome";
-import Dashboard from "../Dashboard/Dashboard";
 import { rootRoute } from "./RootRoute";
 
 export const PathLessLayoutComponent = () => {

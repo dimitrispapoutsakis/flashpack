@@ -1,5 +1,3 @@
-import Input from "../Input/Input";
-
 interface UploadFormProps {
 	onFolderSelect?: (folderPath: string) => void;
 	value?: string;
