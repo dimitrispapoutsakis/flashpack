@@ -3,7 +3,7 @@ const ipkDir = process.env.ipkDir;
 const sdkDir = process.env.sdkDir;
 const fileExcludes = process.env.fileExcludes;
 const deviceName = process.env.deviceName ?? "MyPlayerWired";
-const appId = process.env.appId;
+const appId = process.env.appId ?? "com.lg.app.signage.dev";
 
 import { spawn } from "child_process";
 import { dirname, resolve } from "path";

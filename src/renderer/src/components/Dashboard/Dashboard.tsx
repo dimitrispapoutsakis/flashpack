@@ -29,10 +29,6 @@ const Dashboard = () => {
 			});
 	};
 
-	useEffect(() => {
-		createEnv();
-	}, []);
-
 	return (
 		<FadeIn>
 			<Devices createEnv={createEnv} />
