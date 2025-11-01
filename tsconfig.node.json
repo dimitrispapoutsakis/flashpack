@@ -5,7 +5,8 @@
 		"src/main/**/*",
 		"src/preload/**/*",
 		"electron.rsbuild.config.ts",
-		"rsbuild-main.config.ts"
+		"rsbuild-main.config.ts",
+		"src/globals.d.ts"
 	],
 	"compilerOptions": {
 		"composite": true,

@@ -11,8 +11,8 @@ function createWindow(): void {
 		});  */
 	// Create the browser window.
 	const mainWindow = new BrowserWindow({
-		width: 1000,
-		height: 650,
+		width: 1115,
+		height: 850,
 		show: false,
 		autoHideMenuBar: true,
 		frame: false,
@@ -20,8 +20,9 @@ function createWindow(): void {
 		webPreferences: {
 			preload: join(__dirname, "../preload/index.js"),
 			sandbox: false,
+			contextIsolation: true,
 		},
-		title: "Flashplack",
+		title: "FlashPack",
 	});
 
 	// mainWindow.title = 'Electron-Rsbuild app'

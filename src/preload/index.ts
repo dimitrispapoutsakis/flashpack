@@ -1,4 +1,5 @@
 import { electronAPI } from "@electron-toolkit/preload";
+import { spawn } from "child_process";
 import { contextBridge } from "electron";
 
 // Custom APIs for renderer
@@ -7,6 +8,31 @@ const api = {
 		minimize: () => electronAPI.ipcRenderer.send("window-minimize"),
 		maximize: () => electronAPI.ipcRenderer.send("window-maximize"),
 		close: () => electronAPI.ipcRenderer.send("window-close"),
+	},
+	cli: {
+		getDevices: () => {
+			const aresCliCmd = spawn("ares-setup-device", ["--list"]);
+			const excludedDevices = ["name", "------------------", "emulator", ""];
+			let devices: any[] = [];
+			return new Promise((resolve, reject) => {
+				aresCliCmd.stdout.on("data", (data) => {
+					console.log(data.toString());
+					devices = data
+						.toString()
+						.split("\n")
+						.map((line) => line.trim())
+						.map((device) => {
+							return {
+								name: device.split(" ")[0],
+								deviceInfo: device.split(" ")[3],
+								ssh: device.split(" ")[5],
+							};
+						})
+						.filter((device) => !excludedDevices.includes(device.name));
+					resolve(devices);
+				});
+			});
+		},
 	},
 };
 

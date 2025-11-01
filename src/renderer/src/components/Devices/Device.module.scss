@@ -1,0 +1,19 @@
+@use "../../assets/scss/variables" as vars;
+
+.root {
+  border-radius: vars.$border-radius;
+  min-width: 200px;
+  transition: transform .25s vars.$ease-buttery, box-shadow 0.25s vars.$ease-buttery;
+  cursor: pointer;
+  position: relative;
+
+  &:hover {
+    box-shadow: vars.$box-shadow;
+    transform: scale3d(1.1, 1.1, 1.1);
+  }
+
+  &.active {
+    border: 1px solid vars.$primary;
+    transform: scale3d(1, 1, 1);
+  }
+}

@@ -297,8 +297,8 @@ function createWindow() {
 			console.log(res);
 		});  */ // Create the browser window.
     var mainWindow = new electron__WEBPACK_IMPORTED_MODULE_1__.BrowserWindow(_object_spread_props(_object_spread({
-        width: 1000,
-        height: 650,
+        width: 1115,
+        height: 850,
         show: false,
         autoHideMenuBar: true,
         frame: false
@@ -307,9 +307,10 @@ function createWindow() {
     } : {}), {
         webPreferences: {
             preload: (0,path__WEBPACK_IMPORTED_MODULE_2__.join)(__dirname, "../preload/index.js"),
-            sandbox: false
+            sandbox: false,
+            contextIsolation: true
         },
-        title: "Flashplack"
+        title: "FlashPack"
     }));
     // mainWindow.title = 'Electron-Rsbuild app'
     mainWindow.on("ready-to-show", function() {
