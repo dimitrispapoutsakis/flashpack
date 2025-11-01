@@ -1,5 +1,6 @@
 import { create } from "zustand";
 import { createJSONStorage, persist } from "zustand/middleware";
+import { FILE_EXCLUDES } from "../constants/flashpack";
 
 interface IUiState {
 	selectedPlayer: string;
@@ -9,6 +10,7 @@ interface IUiState {
 	ipkName: string;
 	ipkDir: string;
 	sdkDir: string;
+	fileExcludes: string[];
 	nextButtonDisabled: boolean;
 	setUi: (key: TAppSettings, value: any) => void;
 }
@@ -24,6 +26,7 @@ export const useUiStore = create<IUiState>()(
 			ipkDir: "",
 			sdkDir: "",
 			nextButtonDisabled: false,
+			fileExcludes: FILE_EXCLUDES,
 			setSelectedPlayer: (player) =>
 				set({ selectedPlayer: player ?? "Select Device" }),
 			setHasOnboarded: (hasOnboarded) => set({ hasOnboarded }),

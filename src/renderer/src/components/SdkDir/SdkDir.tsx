@@ -14,7 +14,6 @@ const SdkDir = () => {
 	useEffect(() => {
 		if (!sdkDir.length) {
 			window.api.os.getWebOsSDKDir().then((webosSDKDir) => {
-				console.log(webosSDKDir);
 				setUi("sdkDir", webosSDKDir);
 			});
 		}

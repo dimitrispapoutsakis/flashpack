@@ -8,7 +8,7 @@ export const getParticlesConfig = (
 ) => ({
 	particles: {
 		number: {
-			value: 100,
+			value: 50,
 			density: {
 				enable: true,
 				value_area: 800,
@@ -46,23 +46,12 @@ export const getParticlesConfig = (
 		detectOn: "canvas",
 		events: {
 			onHover: {
-				enable: true,
-				mode: "repulse",
+				enable: false,
 			},
 			onClick: {
-				enable: true,
-				mode: "push",
+				enable: false,
 			},
 			resize: true,
-		},
-		modes: {
-			repulse: {
-				distance: 100,
-				duration: 0.4,
-			},
-			push: {
-				quantity: 4,
-			},
 		},
 	},
 	retinaDetect: true,
