@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { useUiStore } from "@/renderer/src/store/uiStore";
 import Input from "../Input/Input";
+import UploadForm from "../UploadForm/UploadForm";
 
 const SdkDir = () => {
 	const setUi = useUiStore((state) => state.setUi);
@@ -11,12 +12,13 @@ const SdkDir = () => {
 	}, [setUi, sdkDir]);
 
 	useEffect(() => {
-		// Load home directory on mount if sdkDir is empty
-		window.api.os.getWebOsSDKDir().then((webosSDKDir) => {
-			console.log(webosSDKDir);
-			setUi("sdkDir", webosSDKDir);
-		});
-	}, [setUi]);
+		if (!sdkDir.length) {
+			window.api.os.getWebOsSDKDir().then((webosSDKDir) => {
+				console.log(webosSDKDir);
+				setUi("sdkDir", webosSDKDir);
+			});
+		}
+	}, [setUi, sdkDir]);
 
 	return (
 		<div>
@@ -24,6 +26,10 @@ const SdkDir = () => {
 				placeholder="Sdk Directory"
 				value={sdkDir}
 				onChange={(e) => setUi("sdkDir", e.target.value)}
+			/>
+			<UploadForm
+				value={sdkDir}
+				onFolderSelect={(folderPath) => setUi("sdkDir", folderPath)}
 			/>
 		</div>
 	);
