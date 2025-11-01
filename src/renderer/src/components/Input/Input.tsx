@@ -8,14 +8,23 @@ interface IInput extends IRestProps {
 	value?: string;
 }
 
-const Input = ({ placeholder = "", value = "", ...rest }: IInput) => {
+const Input = ({
+	placeholder = "",
+	value = "",
+	className,
+	onClick,
+	onChange,
+	...rest
+}: IInput) => {
 	const [isActive, setIsActive] = useState(false);
 	return (
-		<div className="d-flex flex-col relative" {...rest}>
+		<div className={cn("d-flex flex-col relative", className)} {...rest}>
 			<input
 				className={styles.root}
 				placeholder={placeholder}
 				value={value}
+				onClick={onClick}
+				onChange={onChange}
 				onFocus={() => setIsActive(true)}
 				onBlur={() => setIsActive(false)}
 			/>

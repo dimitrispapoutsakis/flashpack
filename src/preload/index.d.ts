@@ -1,5 +1,6 @@
-import { ElectronAPI } from "@electron-toolkit/preload";
-import { Installer } from "@webos-tools/cli/APIs";
+import type { ElectronAPI } from "@electron-toolkit/preload";
+import type { Installer } from "@webos-tools/cli/APIs";
+import type { OpenDialogOptions, OpenDialogReturnValue } from "electron";
 
 declare global {
 	interface Window {
@@ -18,6 +19,11 @@ declare global {
 				getHardDriveDir: () => Promise<string[]>;
 				getWebOsIPKDir: () => Promise<string[]>;
 				getWebOsSDKDir: () => Promise<string[]>;
+			};
+			dialog: {
+				showOpenDialog: (
+					options: OpenDialogOptions,
+				) => Promise<OpenDialogReturnValue>;
 			};
 		};
 	}

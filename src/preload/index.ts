@@ -15,6 +15,10 @@ const api = {
 		getWebOsSDKDir: () => electronAPI.ipcRenderer.invoke("get-webos-sdk-dir"),
 		getWebOsIPKDir: () => electronAPI.ipcRenderer.invoke("get-webos-ipk-dir"),
 	},
+	dialog: {
+		showOpenDialog: (options: Electron.OpenDialogOptions) =>
+			electronAPI.ipcRenderer.invoke("show-open-dialog", options),
+	},
 	cli: {
 		getDevices: () => {
 			const aresCliCmd = spawn("ares-setup-device", ["--list"]);

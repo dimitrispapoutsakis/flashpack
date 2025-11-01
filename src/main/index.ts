@@ -1,5 +1,5 @@
 import { electronApp, is, optimizer } from "@electron-toolkit/utils";
-import { app, BrowserWindow, ipcMain, shell } from "electron";
+import { app, BrowserWindow, dialog, ipcMain, shell } from "electron";
 import { readdir } from "fs/promises";
 import { homedir } from "os";
 import { join, resolve } from "path";
@@ -105,6 +105,16 @@ app.whenReady().then(() => {
 		const NODE_MODULES_DIR = `${join(projectRoot, "node_modules")}/`;
 		const WEBOS_CLI_DIR = `${NODE_MODULES_DIR}@webos-tools/cli/bin/`;
 		return WEBOS_CLI_DIR;
+	});
+
+	// Dialog handlers
+	ipcMain.handle("show-open-dialog", async (event, options) => {
+		const window = BrowserWindow.fromWebContents(event.sender);
+		if (!window) {
+			throw new Error("Window not found");
+		}
+		const result = await dialog.showOpenDialog(window, options);
+		return result;
 	});
 
 	createWindow();

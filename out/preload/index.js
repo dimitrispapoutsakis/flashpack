@@ -209,6 +209,9 @@ const api = {
         getWebOsSDKDir: ()=>_electron_toolkit_preload__WEBPACK_IMPORTED_MODULE_0__.electronAPI.ipcRenderer.invoke("get-webos-sdk-dir"),
         getWebOsIPKDir: ()=>_electron_toolkit_preload__WEBPACK_IMPORTED_MODULE_0__.electronAPI.ipcRenderer.invoke("get-webos-ipk-dir")
     },
+    dialog: {
+        showOpenDialog: (options)=>_electron_toolkit_preload__WEBPACK_IMPORTED_MODULE_0__.electronAPI.ipcRenderer.invoke("show-open-dialog", options)
+    },
     cli: {
         getDevices: ()=>{
             const aresCliCmd = (0,child_process__WEBPACK_IMPORTED_MODULE_1__.spawn)("ares-setup-device", [

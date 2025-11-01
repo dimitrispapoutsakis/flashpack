@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { useUiStore } from "@/renderer/src/store/uiStore";
 import Input from "../Input/Input";
+import UploadForm from "../UploadForm/UploadForm";
 
 const IpkDir = () => {
 	const setUi = useUiStore((state) => state.setUi);
@@ -22,6 +23,10 @@ const IpkDir = () => {
 				placeholder="IPK Directory"
 				value={ipkDir}
 				onChange={(e) => setUi("ipkDir", e.target.value)}
+			/>
+			<UploadForm
+				value={ipkDir}
+				onFolderSelect={(folderPath) => setUi("ipkDir", folderPath)}
 			/>
 		</div>
 	);
