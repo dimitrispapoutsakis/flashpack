@@ -34,7 +34,9 @@ const OnBoarding = ({ children }: IChildren) => {
 					<Stepper />
 				</div>
 
-				<div className="m-4 flex justify-center items-center">{children}</div>
+				<div className="mt-3 mb-6 flex justify-center items-center">
+					{children}
+				</div>
 
 				<div className="flex flex-row justify-between items-center">
 					<div className="flex justify-start align-start">
