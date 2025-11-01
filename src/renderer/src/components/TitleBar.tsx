@@ -10,7 +10,7 @@ export const TitleBar = () => {
 			}}
 		>
 			<div className="flex text-aqua-500  items-center gap-2 text-sm font-medium text-foreground px-2">
-				<span>Flashplack</span>
+				<span>FlashPack</span>
 			</div>
 
 			<div

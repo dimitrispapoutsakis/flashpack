@@ -1,15 +1,16 @@
 import { Link, useLocation } from "@tanstack/react-router";
-import clamp from "clamp";
 import { Button } from "@/components/animate-ui/components/buttons/button";
 import { cn } from "@/lib/utils";
 import type { IChildren } from "@/typings";
 import { routes } from "../../constants/routes";
+import { useUiStore } from "../../store/uiStore";
 import Paper from "../Paper/Paper";
 import Stepper from "../Stepper/Stepper";
 import Title from "../Title/Title";
 
 const OnBoarding = ({ children }: IChildren) => {
 	const location = useLocation();
+	const nextButtonDisabled = useUiStore((state) => state.nextButtonDisabled);
 	const currentRouteIndex = routes.findIndex(
 		(route) => route.path === location.pathname,
 	);
@@ -53,7 +54,17 @@ const OnBoarding = ({ children }: IChildren) => {
 					</div>
 
 					<div className="flex justify-end align-end">
-						<Link to={nextRoute?.path || ""}>
+						<Link
+							to={nextRoute?.path || ""}
+							disabled={nextButtonDisabled}
+							style={{
+								filter: nextButtonDisabled
+									? "grayscale(100%)"
+									: "grayscale(0%)",
+								opacity: nextButtonDisabled ? 0.5 : 1,
+								pointerEvents: nextButtonDisabled ? "none" : "auto",
+							}}
+						>
 							<Button>Next</Button>
 						</Link>
 					</div>
