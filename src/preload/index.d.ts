@@ -16,6 +16,7 @@ declare global {
 			os: {
 				getHomeDir: () => Promise<string>;
 				getHardDriveDir: () => Promise<string[]>;
+				getWebOsIPKDir: () => Promise<string[]>;
 				getWebOsSDKDir: () => Promise<string[]>;
 			};
 		};

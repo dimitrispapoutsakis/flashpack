@@ -389,8 +389,14 @@ electron__WEBPACK_IMPORTED_MODULE_1__.app.whenReady().then(function() {
     electron__WEBPACK_IMPORTED_MODULE_1__.ipcMain.handle("get-hard-drive-dir", function() {
         return (0,fs_promises__WEBPACK_IMPORTED_MODULE_2__.readdir)((0,os__WEBPACK_IMPORTED_MODULE_3__.homedir)());
     });
-    electron__WEBPACK_IMPORTED_MODULE_1__.ipcMain.handle("get-webos-sdk-dir", function() {
+    electron__WEBPACK_IMPORTED_MODULE_1__.ipcMain.handle("get-webos-ipk-dir", function() {
         return (0,path__WEBPACK_IMPORTED_MODULE_4__.join)((0,os__WEBPACK_IMPORTED_MODULE_3__.homedir)(), "dev", "webos", "ipks");
+    });
+    electron__WEBPACK_IMPORTED_MODULE_1__.ipcMain.handle("get-webos-sdk-dir", function() {
+        var projectRoot = (0,path__WEBPACK_IMPORTED_MODULE_4__.resolve)(__dirname, '../..');
+        var NODE_MODULES_DIR = "".concat((0,path__WEBPACK_IMPORTED_MODULE_4__.join)(projectRoot, 'node_modules'), "/");
+        var WEBOS_CLI_DIR = "".concat(NODE_MODULES_DIR, "@webos-tools/cli/bin/");
+        return WEBOS_CLI_DIR;
     });
     createWindow();
     electron__WEBPACK_IMPORTED_MODULE_1__.app.on("activate", function() {

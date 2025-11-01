@@ -2,31 +2,29 @@ import { useEffect } from "react";
 import { useUiStore } from "@/renderer/src/store/uiStore";
 import Input from "../Input/Input";
 
-const SdkDir = () => {
+const IpkDir = () => {
 	const setUi = useUiStore((state) => state.setUi);
-	const sdkDir = useUiStore((state) => state.sdkDir);
+	const ipkDir = useUiStore((state) => state.ipkDir);
 
 	useEffect(() => {
-		setUi("nextButtonDisabled", sdkDir.length === 0);
-	}, [setUi, sdkDir]);
+		setUi("nextButtonDisabled", ipkDir.length === 0);
+	}, [setUi, ipkDir]);
 
 	useEffect(() => {
-		// Load home directory on mount if sdkDir is empty
-		window.api.os.getWebOsSDKDir().then((webosSDKDir) => {
-			console.log(webosSDKDir);
-			setUi("sdkDir", webosSDKDir);
+		window.api.os.getWebOsIPKDir().then((webosSDKDir) => {
+			setUi("ipkDir", webosSDKDir);
 		});
 	}, [setUi]);
 
 	return (
 		<div>
 			<Input
-				placeholder="Sdk Directory"
-				value={sdkDir}
-				onChange={(e) => setUi("sdkDir", e.target.value)}
+				placeholder="IPK Directory"
+				value={ipkDir}
+				onChange={(e) => setUi("ipkDir", e.target.value)}
 			/>
 		</div>
 	);
 };
 
-export default SdkDir;
+export default IpkDir;

@@ -2,7 +2,7 @@ import { electronApp, is, optimizer } from "@electron-toolkit/utils";
 import { app, BrowserWindow, ipcMain, shell } from "electron";
 import { readdir } from "fs/promises";
 import { homedir } from "os";
-import { join } from "path";
+import { join, resolve } from "path";
 import icon from "../../resources/icon.png?asset";
 
 //  import { Installer } from "@webos-tools/cli/APIs";
@@ -96,8 +96,15 @@ app.whenReady().then(() => {
 		return readdir(homedir());
 	});
 
-	ipcMain.handle("get-webos-sdk-dir", () => {
+	ipcMain.handle("get-webos-ipk-dir", () => {
 		return join(homedir(), "dev", "webos", "ipks");
+	});
+
+	ipcMain.handle("get-webos-sdk-dir", () => {
+		const projectRoot = resolve(__dirname, "../..");
+		const NODE_MODULES_DIR = `${join(projectRoot, "node_modules")}/`;
+		const WEBOS_CLI_DIR = `${NODE_MODULES_DIR}@webos-tools/cli/bin/`;
+		return WEBOS_CLI_DIR;
 	});
 
 	createWindow();

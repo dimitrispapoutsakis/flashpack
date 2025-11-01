@@ -7,6 +7,7 @@ interface IUiState {
 	hasOnboarded: boolean;
 	setHasOnboarded: (hasOnboarded: boolean) => void;
 	ipkName: string;
+	ipkDir: string;
 	sdkDir: string;
 	nextButtonDisabled: boolean;
 	setUi: (key: TAppSettings, value: any) => void;
@@ -20,6 +21,7 @@ export const useUiStore = create<IUiState>()(
 			selectedPlayer: "Select Device",
 			hasOnboarded: false,
 			ipkName: "a.ipk",
+			ipkDir: "",
 			sdkDir: "",
 			nextButtonDisabled: false,
 			setSelectedPlayer: (player) =>

@@ -206,7 +206,8 @@ const api = {
     os: {
         getHomeDir: ()=>_electron_toolkit_preload__WEBPACK_IMPORTED_MODULE_0__.electronAPI.ipcRenderer.invoke("get-home-dir"),
         getHardDriveDir: ()=>_electron_toolkit_preload__WEBPACK_IMPORTED_MODULE_0__.electronAPI.ipcRenderer.invoke("get-hard-drive-dir"),
-        getWebOsSDKDir: ()=>_electron_toolkit_preload__WEBPACK_IMPORTED_MODULE_0__.electronAPI.ipcRenderer.invoke("get-webos-sdk-dir")
+        getWebOsSDKDir: ()=>_electron_toolkit_preload__WEBPACK_IMPORTED_MODULE_0__.electronAPI.ipcRenderer.invoke("get-webos-sdk-dir"),
+        getWebOsIPKDir: ()=>_electron_toolkit_preload__WEBPACK_IMPORTED_MODULE_0__.electronAPI.ipcRenderer.invoke("get-webos-ipk-dir")
     },
     cli: {
         getDevices: ()=>{

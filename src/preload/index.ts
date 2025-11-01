@@ -13,6 +13,7 @@ const api = {
 		getHomeDir: () => electronAPI.ipcRenderer.invoke("get-home-dir"),
 		getHardDriveDir: () => electronAPI.ipcRenderer.invoke("get-hard-drive-dir"),
 		getWebOsSDKDir: () => electronAPI.ipcRenderer.invoke("get-webos-sdk-dir"),
+		getWebOsIPKDir: () => electronAPI.ipcRenderer.invoke("get-webos-ipk-dir"),
 	},
 	cli: {
 		getDevices: () => {
