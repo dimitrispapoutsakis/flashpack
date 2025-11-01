@@ -1,0 +1,17 @@
+@use "../../assets/scss/variables" as vars;
+
+.bracket {
+  color: vars.$primary;
+}
+
+.text {
+  text-shadow:
+    0 0 10px #ffd700,
+    0 0 20px #ffd700,
+    0 0 30px #ffd700,
+    0 0 40px #ffeb3b,
+    0 0 70px #fff8b0;
+  color: vars.$primary;
+  /* Optionally boost brightness for glowing effect */
+  /* filter: brightness(1.2); */
+}
