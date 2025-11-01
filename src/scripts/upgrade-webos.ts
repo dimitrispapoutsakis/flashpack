@@ -1,3 +1,14 @@
+import fs from "fs";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+
+const env = fs.readFileSync(path.join(__dirname, "env.txt"), "utf8");
+const envObj = JSON.parse(env);
+
+console.log(envObj);
+
+process.exit(0);
 const ipkName = process.env.ipkName;
 const ipkDir = process.env.ipkDir;
 const sdkDir = process.env.sdkDir;
@@ -6,11 +17,9 @@ const deviceName = process.env.deviceName ?? "MyPlayerWired";
 const appId = process.env.appId ?? "com.lg.app.signage.dev";
 
 import { spawn } from "child_process";
-import { dirname, resolve } from "path";
+import path, { dirname, resolve } from "path";
 import { fileURLToPath } from "url";
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
 /* 
 console.log(sdkDir);
 process.exit(0); */

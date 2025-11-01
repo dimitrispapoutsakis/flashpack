@@ -1,11 +1,11 @@
 import { defineConfig } from "@rsbuild/core";
+import { pluginBabel } from "@rsbuild/plugin-babel";
 import { pluginReact } from "@rsbuild/plugin-react";
 import { pluginSass } from "@rsbuild/plugin-sass";
 import { resolve } from "path";
-import { pluginBabel } from "@rsbuild/plugin-babel";
 
 const ReactCompilerConfig = {
-	target: '18', 
+	target: "18",
 };
 
 export default defineConfig({
@@ -24,7 +24,7 @@ export default defineConfig({
 					include: /\.(?:jsx|tsx)$/,
 					babelLoaderOptions(opts) {
 						opts.plugins?.unshift([
-							'babel-plugin-react-compiler',
+							"babel-plugin-react-compiler",
 							ReactCompilerConfig,
 						]);
 					},

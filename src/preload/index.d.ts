@@ -6,9 +6,6 @@ declare global {
 	interface Window {
 		electron: ElectronAPI;
 		api: {
-			system: {
-				createEnv: (env: any) => Promise<any>;
-			};
 			cli: {
 				Installer: ReturnType<typeof Installer>;
 				upgradeWebos: (deviceName: string) => Promise<any>;

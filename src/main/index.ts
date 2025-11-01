@@ -1,12 +1,11 @@
 import { electronApp, is, optimizer } from "@electron-toolkit/utils";
 import { spawn } from "child_process";
 import { app, BrowserWindow, dialog, ipcMain, shell } from "electron";
+import fs from "fs";
 import { readdir } from "fs/promises";
 import { homedir } from "os";
-import { join, resolve } from "path";
+import path, { join, resolve } from "path";
 import icon from "../../resources/icon.png?asset";
-import fs from "fs";
-import path from "path";
 
 //  import { Installer } from "@webos-tools/cli/APIs";
 // console.log(Installer);
@@ -108,21 +107,6 @@ app.whenReady().then(() => {
 		const NODE_MODULES_DIR = `${join(projectRoot, "node_modules")}/`;
 		const WEBOS_CLI_DIR = `${NODE_MODULES_DIR}@webos-tools/cli/bin/`;
 		return WEBOS_CLI_DIR;
-	});
-
-	ipcMain.handle("create-env", (_, env) => {
-		const envPath = path.join(process.cwd(), ".env");
-		let envContent = "";
-
-		if (env && typeof env === "object") {
-			envContent = Object.entries(env)
-				.map(([key, value]) => `${key.toString()}=${String(value ?? "")}`)
-				.join("\n");
-		}
-
-		fs.writeFileSync(envPath, envContent);
-
-		return { ...env };
 	});
 
 	ipcMain.handle("upgrade-webos", async (event, deviceName: string) => {

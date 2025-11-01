@@ -25,7 +25,11 @@ const Devices = () => {
 
 			<div className="flex flex-row">
 				{devices.map((device, index) => (
-					<Device key={`${device.address}-${index}`} device={device} index={index} />
+					<Device
+						key={`${device.address}-${index}`}
+						device={device}
+						index={index}
+					/>
 				))}
 			</div>
 		</div>

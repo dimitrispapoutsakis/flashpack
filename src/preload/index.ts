@@ -15,9 +15,6 @@ const api = {
 		getWebOsSDKDir: () => electronAPI.ipcRenderer.invoke("get-webos-sdk-dir"),
 		getWebOsIPKDir: () => electronAPI.ipcRenderer.invoke("get-webos-ipk-dir"),
 	},
-	system: {
-		createEnv: (env: any) => electronAPI.ipcRenderer.invoke("create-env", env),
-	},
 	dialog: {
 		showOpenDialog: (options: Electron.OpenDialogOptions) =>
 			electronAPI.ipcRenderer.invoke("show-open-dialog", options),

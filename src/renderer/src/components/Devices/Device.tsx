@@ -19,24 +19,6 @@ const Device = ({ device, ...rest }: IDevice) => {
 	const setSelectedPlayer = useUiStore((state) => state.setSelectedPlayer);
 	const isSelected = selectedPlayer === device.name;
 
-  const ipkName = useUiStore((state) => state.ipkName);
-	const ipkDir = useUiStore((state) => state.ipkDir);
-	const sdkDir = useUiStore((state) => state.sdkDir);
-	const fileExcludes = useUiStore((state) => state.fileExcludes);
-	const appId = useUiStore((state) => state.appId);
-	const deviceName = useUiStore((state) => state.selectedPlayer);
-
-	const createEnv = useCallback(() => {
-		return window.api.system.createEnv({
-			ipkName,
-			ipkDir,
-			sdkDir,
-			fileExcludes,
-			appId,
-			deviceName,
-		});
-	}, [ipkName, ipkDir, sdkDir, fileExcludes, appId, deviceName]);
-
 	const className = cn(
 		"flex flex-col items-center justify-center bg-background p-4 flex-wrap m-3",
 		styles.root,
@@ -45,9 +27,7 @@ const Device = ({ device, ...rest }: IDevice) => {
 
 	const onPointerDown = () => {
 		setSelectedPlayer(device.name);
-		/* createEnv().then((env: any) => {
-			// window.api.cli.upgradeWebos(device.name, env);
-		}); */
+		// window.api.cli.upgradeWebos(device.name);
 	};
 
 	return (
