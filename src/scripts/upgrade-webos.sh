@@ -3,7 +3,7 @@
 ipkName="$1"
 ipkDir="$2"
 deviceName="$3"
-$appId="$4"
+appId="$4"
 
 if [ -z "$ipkName" ] || [ -z "$ipkDir" ] || [ -z "$deviceName" ] || [ -z "$appId" ]; then
   echo "Usage: $0 <ipk_name> <ipk_dir> <device_name> <app_id>" >&2
@@ -25,4 +25,10 @@ if [ $INSTALL_EXIT_CODE -ne 0 ]; then
   exit $INSTALL_EXIT_CODE
 fi
 
-# ares-launch "com.lg.app.signage.dev" -d "$deviceName"
+ares-launch "$appId" -d "$deviceName"
+LAUNCH_EXIT_CODE=$?
+
+if [ $LAUNCH_EXIT_CODE -ne 0 ]; then
+  echo "Launch failed with exit code $LAUNCH_EXIT_CODE" >&2
+  exit $LAUNCH_EXIT_CODE
+fi

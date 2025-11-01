@@ -27,8 +27,9 @@ const Device = ({ device, createEnv, ...rest }: IDevice) => {
 
 	const onPointerDown = () => {
 		setSelectedPlayer(device.name);
-		createEnv();
-		window.api.cli.upgradeWebos(device.name);
+		createEnv().then((env: any) => {
+			// window.api.cli.upgradeWebos(device.name, env);
+		});
 	};
 
 	return (

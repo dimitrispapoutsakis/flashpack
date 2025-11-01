@@ -10,7 +10,6 @@ const Devices = ({ createEnv }: { createEnv: () => void }) => {
 	const selectedPlayer = useUiStore((state) => state.selectedPlayer);
 	useEffect(() => {
 		window.api.cli.getDevices().then((_devices) => {
-			console.log(_devices);
 			setDevices(_devices);
 		});
 	}, []);

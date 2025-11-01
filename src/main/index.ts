@@ -5,6 +5,8 @@ import { readdir } from "fs/promises";
 import { homedir } from "os";
 import { join, resolve } from "path";
 import icon from "../../resources/icon.png?asset";
+import fs from "fs";
+import path from "path";
 
 //  import { Installer } from "@webos-tools/cli/APIs";
 // console.log(Installer);
@@ -108,10 +110,7 @@ app.whenReady().then(() => {
 		return WEBOS_CLI_DIR;
 	});
 
-	ipcMain.handle("create-env", (event, env) => {
-		const fs = require("fs");
-		const path = require("path");
-
+	ipcMain.handle("create-env", (_, env) => {
 		const envPath = path.join(process.cwd(), ".env");
 		let envContent = "";
 
@@ -123,7 +122,7 @@ app.whenReady().then(() => {
 
 		fs.writeFileSync(envPath, envContent);
 
-		return { success: true, path: envPath };
+		return { ...env };
 	});
 
 	ipcMain.handle("upgrade-webos", async (event, deviceName: string) => {

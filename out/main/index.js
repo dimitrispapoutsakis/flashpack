@@ -256,6 +256,8 @@ __webpack_require__.r(__webpack_exports__);
 /* ESM import */var path__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__("path");
 /* ESM import */var path__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(path__WEBPACK_IMPORTED_MODULE_5__);
 /* ESM import */var _resources_icon_png_asset__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__("./resources/icon.png?asset");
+/* ESM import */var fs__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__("fs");
+/* ESM import */var fs__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(fs__WEBPACK_IMPORTED_MODULE_7__);
 function _array_like_to_array(arr, len) {
     if (len == null || len > arr.length) len = arr.length;
     for(var i = 0, arr2 = new Array(len); i < len; i++)arr2[i] = arr[i];
@@ -485,6 +487,8 @@ function _ts_generator(thisArg, body) {
 
 
 
+
+
 //  import { Installer } from "@webos-tools/cli/APIs";
 // console.log(Installer);
 function createWindow() {
@@ -580,9 +584,8 @@ electron__WEBPACK_IMPORTED_MODULE_2__.app.whenReady().then(function() {
         return WEBOS_CLI_DIR;
     });
     electron__WEBPACK_IMPORTED_MODULE_2__.ipcMain.handle("create-env", function(event, env) {
-        var fs = __webpack_require__("fs");
-        var path = __webpack_require__("path");
-        var envPath = path.join(process.cwd(), ".env");
+        console.log(env, "env");
+        var envPath = path__WEBPACK_IMPORTED_MODULE_5___default().join(process.cwd(), ".env");
         var envContent = "";
         if (env && (typeof env === "undefined" ? "undefined" : _type_of(env)) === "object") {
             envContent = Object.entries(env).map(function(param) {
@@ -590,11 +593,8 @@ electron__WEBPACK_IMPORTED_MODULE_2__.app.whenReady().then(function() {
                 return "".concat(key.toString(), "=").concat(String(value !== null && value !== void 0 ? value : ""));
             }).join("\n");
         }
-        fs.writeFileSync(envPath, envContent);
-        return {
-            success: true,
-            path: envPath
-        };
+        fs__WEBPACK_IMPORTED_MODULE_7___default().writeFileSync(envPath, envContent);
+        return _object_spread({}, env);
     });
     electron__WEBPACK_IMPORTED_MODULE_2__.ipcMain.handle("upgrade-webos", function(event, deviceName) {
         return _async_to_generator(function() {

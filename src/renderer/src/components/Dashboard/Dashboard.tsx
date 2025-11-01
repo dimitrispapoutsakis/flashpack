@@ -15,18 +15,14 @@ const Dashboard = () => {
 	const deviceName = useUiStore((state) => state.selectedPlayer);
 
 	const createEnv = () => {
-		window.api.system
-			.createEnv({
-				ipkName,
-				ipkDir,
-				sdkDir,
-				fileExcludes,
-				appId,
-				deviceName,
-			})
-			.then((env: any) => {
-				console.log(env);
-			});
+		return window.api.system.createEnv({
+			ipkName,
+			ipkDir,
+			sdkDir,
+			fileExcludes,
+			appId,
+			deviceName,
+		});
 	};
 
 	return (
