@@ -1,5 +1,7 @@
 import { electronApp, is, optimizer } from "@electron-toolkit/utils";
 import { app, BrowserWindow, ipcMain, shell } from "electron";
+import { readdir } from "fs/promises";
+import { homedir } from "os";
 import { join } from "path";
 import icon from "../../resources/icon.png?asset";
 
@@ -83,6 +85,19 @@ app.whenReady().then(() => {
 	ipcMain.on("window-close", (event) => {
 		const window = BrowserWindow.fromWebContents(event.sender);
 		window?.close();
+	});
+
+	// OS utilities
+	ipcMain.handle("get-home-dir", () => {
+		return homedir();
+	});
+
+	ipcMain.handle("get-hard-drive-dir", () => {
+		return readdir(homedir());
+	});
+
+	ipcMain.handle("get-webos-sdk-dir", () => {
+		return join(homedir(), "dev", "webos", "ipks");
 	});
 
 	createWindow();

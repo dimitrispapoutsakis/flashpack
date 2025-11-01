@@ -9,6 +9,14 @@ module.exports = __webpack_require__.p + "static/image/icon.943b7a7d.png";
 module.exports = require("electron");
 
 }),
+"fs/promises": (function (module) {
+module.exports = require("fs/promises");
+
+}),
+"os": (function (module) {
+module.exports = require("os");
+
+}),
 "path": (function (module) {
 module.exports = require("path");
 
@@ -233,7 +241,11 @@ __webpack_require__.r(__webpack_exports__);
 /* ESM import */var electron__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(electron__WEBPACK_IMPORTED_MODULE_1__);
 /* ESM import */var path__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__("path");
 /* ESM import */var path__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(path__WEBPACK_IMPORTED_MODULE_2__);
-/* ESM import */var _resources_icon_png_asset__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__("./resources/icon.png?asset");
+/* ESM import */var os__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__("os");
+/* ESM import */var os__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(os__WEBPACK_IMPORTED_MODULE_3__);
+/* ESM import */var _resources_icon_png_asset__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__("./resources/icon.png?asset");
+/* ESM import */var fs_promises__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__("fs/promises");
+/* ESM import */var fs_promises__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(fs_promises__WEBPACK_IMPORTED_MODULE_5__);
 function _define_property(obj, key, value) {
     if (key in obj) {
         Object.defineProperty(obj, key, {
@@ -290,6 +302,8 @@ function _object_spread_props(target, source) {
 
 
 
+
+
 //  import { Installer } from "@webos-tools/cli/APIs";
 // console.log(Installer);
 function createWindow() {
@@ -303,7 +317,7 @@ function createWindow() {
         autoHideMenuBar: true,
         frame: false
     }, process.platform === "linux" ? {
-        icon: _resources_icon_png_asset__WEBPACK_IMPORTED_MODULE_3__
+        icon: _resources_icon_png_asset__WEBPACK_IMPORTED_MODULE_4__
     } : {}), {
         webPreferences: {
             preload: (0,path__WEBPACK_IMPORTED_MODULE_2__.join)(__dirname, "../preload/index.js"),
@@ -367,6 +381,16 @@ electron__WEBPACK_IMPORTED_MODULE_1__.app.whenReady().then(function() {
     electron__WEBPACK_IMPORTED_MODULE_1__.ipcMain.on("window-close", function(event) {
         var window = electron__WEBPACK_IMPORTED_MODULE_1__.BrowserWindow.fromWebContents(event.sender);
         window === null || window === void 0 ? void 0 : window.close();
+    });
+    // OS utilities
+    electron__WEBPACK_IMPORTED_MODULE_1__.ipcMain.handle("get-home-dir", function() {
+        return (0,os__WEBPACK_IMPORTED_MODULE_3__.homedir)();
+    });
+    electron__WEBPACK_IMPORTED_MODULE_1__.ipcMain.handle("get-hard-drive-dir", function() {
+        return (0,fs_promises__WEBPACK_IMPORTED_MODULE_5__.readdir)((0,os__WEBPACK_IMPORTED_MODULE_3__.homedir)());
+    });
+    electron__WEBPACK_IMPORTED_MODULE_1__.ipcMain.handle('get-webos-sdk-dir', function() {
+        return (0,path__WEBPACK_IMPORTED_MODULE_2__.join)((0,os__WEBPACK_IMPORTED_MODULE_3__.homedir)(), "dev", "webos", "ipks");
     });
     createWindow();
     electron__WEBPACK_IMPORTED_MODULE_1__.app.on("activate", function() {

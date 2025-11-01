@@ -9,6 +9,11 @@ const api = {
 		maximize: () => electronAPI.ipcRenderer.send("window-maximize"),
 		close: () => electronAPI.ipcRenderer.send("window-close"),
 	},
+	os: {
+		getHomeDir: () => electronAPI.ipcRenderer.invoke("get-home-dir"),
+		getHardDriveDir: () => electronAPI.ipcRenderer.invoke("get-hard-drive-dir"),
+		getWebOsSDKDir: () => electronAPI.ipcRenderer.invoke("get-webos-sdk-dir"),
+	},
 	cli: {
 		getDevices: () => {
 			const aresCliCmd = spawn("ares-setup-device", ["--list"]);

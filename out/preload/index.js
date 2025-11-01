@@ -203,6 +203,11 @@ const api = {
         maximize: ()=>_electron_toolkit_preload__WEBPACK_IMPORTED_MODULE_0__.electronAPI.ipcRenderer.send("window-maximize"),
         close: ()=>_electron_toolkit_preload__WEBPACK_IMPORTED_MODULE_0__.electronAPI.ipcRenderer.send("window-close")
     },
+    os: {
+        getHomeDir: ()=>_electron_toolkit_preload__WEBPACK_IMPORTED_MODULE_0__.electronAPI.ipcRenderer.invoke("get-home-dir"),
+        getHardDriveDir: ()=>_electron_toolkit_preload__WEBPACK_IMPORTED_MODULE_0__.electronAPI.ipcRenderer.invoke("get-hard-drive-dir"),
+        getWebOsSDKDir: ()=>_electron_toolkit_preload__WEBPACK_IMPORTED_MODULE_0__.electronAPI.ipcRenderer.invoke("get-webos-sdk-dir")
+    },
     cli: {
         getDevices: ()=>{
             const aresCliCmd = (0,child_process__WEBPACK_IMPORTED_MODULE_1__.spawn)("ares-setup-device", [

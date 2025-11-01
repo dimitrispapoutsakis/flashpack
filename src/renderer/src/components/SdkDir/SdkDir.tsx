@@ -10,6 +10,14 @@ const SdkDir = () => {
 		setUi("nextButtonDisabled", sdkDir.length === 0);
 	}, [setUi, sdkDir]);
 
+	useEffect(() => {
+		// Load home directory on mount if sdkDir is empty
+		window.api.os.getWebOsSDKDir().then((webosSDKDir) => {
+			console.log(webosSDKDir);
+			setUi("sdkDir", webosSDKDir);
+		});
+	}, [setUi]);
+
 	return (
 		<div>
 			<Input

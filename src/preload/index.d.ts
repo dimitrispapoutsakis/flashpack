@@ -13,6 +13,11 @@ declare global {
 				maximize: () => void;
 				close: () => void;
 			};
+			os: {
+				getHomeDir: () => Promise<string>;
+				getHardDriveDir: () => Promise<string[]>;
+				getWebOsSDKDir: () => Promise<string[]>;
+			};
 		};
 	}
 }
