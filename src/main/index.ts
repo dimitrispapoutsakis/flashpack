@@ -109,68 +109,67 @@ app.whenReady().then(() => {
 		return WEBOS_CLI_DIR;
 	});
 
-	ipcMain.handle("upgrade-webos", async (event, deviceName: string) => {
-		try {
-			// Get UI store values from renderer
-			const uiStore = await event.sender.executeJavaScript(`
-				(() => {
-					const stored = localStorage.getItem('ui-storage');
-					return stored ? JSON.parse(stored) : null;
-				})()
-			`);
+	ipcMain.handle("upgrade-webos", async (_, uiStorageJsonString: any) => {
+		const { state: uiStorage } = uiStorageJsonString;
+		console.log(uiStorage);
+		const ipkName = uiStorage.ipkName;
+		const ipkDir = uiStorage.ipkDir;
+		const deviceName = uiStorage.selectedPlayer;
+		const appId = uiStorage.appId;
 
-			const storeState = uiStore?.state || {};
-			const ipkName = storeState.ipkName || "a.ipk";
-			const ipkDir = storeState.ipkDir || "";
-			const sdkDir = storeState.sdkDir || "";
-
-			if (!ipkDir || !deviceName) {
-				throw new Error("IPK directory and device name are required");
-			}
-
-			const ipkPath = join(ipkDir, ipkName);
-
-			// Run ares-install command
-			return new Promise((resolve, reject) => {
-				const aresInstall = spawn("ares-install", [
-					"--device",
-					deviceName,
-					ipkPath,
-				]);
-
-				let output = "";
-				let errorOutput = "";
-
-				aresInstall.stdout.on("data", (data) => {
-					output += data.toString();
-					console.log(data.toString());
-				});
-
-				aresInstall.stderr.on("data", (data) => {
-					errorOutput += data.toString();
-					console.error(data.toString());
-				});
-
-				aresInstall.on("close", (code) => {
-					if (code === 0) {
-						resolve({ success: true, output, deviceName });
-					} else {
-						reject({
-							success: false,
-							error: errorOutput || "Installation failed",
-							code,
-						});
-					}
-				});
-
-				aresInstall.on("error", (error) => {
-					reject({ success: false, error: error.message });
-				});
-			});
-		} catch (error) {
-			console.error("Error upgrading WebOS:", error);
-			throw error;
+		if (!ipkDir || !deviceName) {
+			throw new Error("IPK directory and device name are required");
 		}
+
+		// NOTE: Use app.getAppPath() to get the app root directory
+		// This works in both dev and production
+		const appPath = app.getAppPath();
+		const scriptPath = resolve(appPath, "src/scripts/upgrade-webos.sh");
+
+		if (!fs.existsSync(scriptPath)) {
+			throw new Error(`Script not found: ${scriptPath}`);
+		}
+
+		return new Promise((resolve, reject) => {
+			const upgradeWebosScript = spawn("bash", [
+				scriptPath,
+				ipkName,
+				ipkDir,
+				deviceName,
+				appId,
+			]);
+
+			let output = "";
+			let errorOutput = "";
+
+			upgradeWebosScript.stdout.on("data", (data) => {
+				const text = data.toString();
+				output += text;
+				console.log(text);
+			});
+
+			upgradeWebosScript.stderr.on("data", (data) => {
+				const text = data.toString();
+				errorOutput += text;
+				console.error(text);
+			});
+
+			upgradeWebosScript.on("close", (code) => {
+				if (code === 0) {
+					resolve({ success: true, output, deviceName });
+				} else {
+					reject({
+						success: false,
+						error: errorOutput || "Upgrade failed",
+						code,
+					});
+				}
+			});
+
+			upgradeWebosScript.on("error", (error) => {
+				reject({ success: false, error: error.message });
+			});
+		});
 	});
 
 	// Dialog handlers

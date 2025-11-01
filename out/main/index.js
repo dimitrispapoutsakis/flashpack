@@ -13,6 +13,10 @@ module.exports = require("child_process");
 module.exports = require("electron");
 
 }),
+"fs": (function (module) {
+module.exports = require("fs");
+
+}),
 "fs/promises": (function (module) {
 module.exports = require("fs/promises");
 
@@ -245,13 +249,15 @@ __webpack_require__.r(__webpack_exports__);
 /* ESM import */var child_process__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(child_process__WEBPACK_IMPORTED_MODULE_1__);
 /* ESM import */var electron__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__("electron");
 /* ESM import */var electron__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(electron__WEBPACK_IMPORTED_MODULE_2__);
-/* ESM import */var fs_promises__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__("fs/promises");
-/* ESM import */var fs_promises__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(fs_promises__WEBPACK_IMPORTED_MODULE_3__);
-/* ESM import */var os__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__("os");
-/* ESM import */var os__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(os__WEBPACK_IMPORTED_MODULE_4__);
-/* ESM import */var path__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__("path");
-/* ESM import */var path__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(path__WEBPACK_IMPORTED_MODULE_5__);
-/* ESM import */var _resources_icon_png_asset__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__("./resources/icon.png?asset");
+/* ESM import */var fs__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__("fs");
+/* ESM import */var fs__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(fs__WEBPACK_IMPORTED_MODULE_3__);
+/* ESM import */var fs_promises__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__("fs/promises");
+/* ESM import */var fs_promises__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(fs_promises__WEBPACK_IMPORTED_MODULE_4__);
+/* ESM import */var os__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__("os");
+/* ESM import */var os__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(os__WEBPACK_IMPORTED_MODULE_5__);
+/* ESM import */var path__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__("path");
+/* ESM import */var path__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(path__WEBPACK_IMPORTED_MODULE_6__);
+/* ESM import */var _resources_icon_png_asset__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__("./resources/icon.png?asset");
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {
     try {
         var info = gen[key](arg);
@@ -431,6 +437,7 @@ function _ts_generator(thisArg, body) {
 
 
 
+
 //  import { Installer } from "@webos-tools/cli/APIs";
 // console.log(Installer);
 function createWindow() {
@@ -444,10 +451,10 @@ function createWindow() {
         autoHideMenuBar: true,
         frame: false
     }, process.platform === "linux" ? {
-        icon: _resources_icon_png_asset__WEBPACK_IMPORTED_MODULE_6__
+        icon: _resources_icon_png_asset__WEBPACK_IMPORTED_MODULE_7__
     } : {}), {
         webPreferences: {
-            preload: (0,path__WEBPACK_IMPORTED_MODULE_5__.join)(__dirname, "../preload/index.js"),
+            preload: (0,path__WEBPACK_IMPORTED_MODULE_6__.join)(__dirname, "../preload/index.js"),
             sandbox: false,
             contextIsolation: true
         },
@@ -468,7 +475,7 @@ function createWindow() {
     if (_electron_toolkit_utils__WEBPACK_IMPORTED_MODULE_0__.is.dev && process.env["ELECTRON_RENDERER_URL"]) {
         mainWindow.loadURL(process.env["ELECTRON_RENDERER_URL"]);
     } else {
-        mainWindow.loadFile((0,path__WEBPACK_IMPORTED_MODULE_5__.join)(__dirname, "../renderer/index.html"));
+        mainWindow.loadFile((0,path__WEBPACK_IMPORTED_MODULE_6__.join)(__dirname, "../renderer/index.html"));
     }
 }
 // This method will be called when Electron has finished
@@ -511,97 +518,85 @@ electron__WEBPACK_IMPORTED_MODULE_2__.app.whenReady().then(function() {
     });
     // OS utilities
     electron__WEBPACK_IMPORTED_MODULE_2__.ipcMain.handle("get-home-dir", function() {
-        return (0,os__WEBPACK_IMPORTED_MODULE_4__.homedir)();
+        return (0,os__WEBPACK_IMPORTED_MODULE_5__.homedir)();
     });
     electron__WEBPACK_IMPORTED_MODULE_2__.ipcMain.handle("get-hard-drive-dir", function() {
-        return (0,fs_promises__WEBPACK_IMPORTED_MODULE_3__.readdir)((0,os__WEBPACK_IMPORTED_MODULE_4__.homedir)());
+        return (0,fs_promises__WEBPACK_IMPORTED_MODULE_4__.readdir)((0,os__WEBPACK_IMPORTED_MODULE_5__.homedir)());
     });
     electron__WEBPACK_IMPORTED_MODULE_2__.ipcMain.handle("get-webos-ipk-dir", function() {
-        return (0,path__WEBPACK_IMPORTED_MODULE_5__.join)((0,os__WEBPACK_IMPORTED_MODULE_4__.homedir)(), "dev", "webos", "ipks");
+        return (0,path__WEBPACK_IMPORTED_MODULE_6__.join)((0,os__WEBPACK_IMPORTED_MODULE_5__.homedir)(), "dev", "webos", "ipks");
     });
     electron__WEBPACK_IMPORTED_MODULE_2__.ipcMain.handle("get-webos-sdk-dir", function() {
-        var projectRoot = (0,path__WEBPACK_IMPORTED_MODULE_5__.resolve)(__dirname, "../..");
-        var NODE_MODULES_DIR = "".concat((0,path__WEBPACK_IMPORTED_MODULE_5__.join)(projectRoot, "node_modules"), "/");
+        var projectRoot = (0,path__WEBPACK_IMPORTED_MODULE_6__.resolve)(__dirname, "../..");
+        var NODE_MODULES_DIR = "".concat((0,path__WEBPACK_IMPORTED_MODULE_6__.join)(projectRoot, "node_modules"), "/");
         var WEBOS_CLI_DIR = "".concat(NODE_MODULES_DIR, "@webos-tools/cli/bin/");
         return WEBOS_CLI_DIR;
     });
-    electron__WEBPACK_IMPORTED_MODULE_2__.ipcMain.handle("upgrade-webos", function(event, deviceName) {
+    electron__WEBPACK_IMPORTED_MODULE_2__.ipcMain.handle("upgrade-webos", function(_, uiStorageJsonString) {
         return _async_to_generator(function() {
-            var uiStore, storeState, ipkName, ipkDir, sdkDir, ipkPath, error;
+            var uiStorage, ipkName, ipkDir, deviceName, appId, appPath, scriptPath;
             return _ts_generator(this, function(_state) {
-                switch(_state.label){
-                    case 0:
-                        _state.trys.push([
-                            0,
-                            2,
-                            ,
-                            3
-                        ]);
-                        return [
-                            4,
-                            event.sender.executeJavaScript("\n				(() => {\n					const stored = localStorage.getItem('ui-storage');\n					return stored ? JSON.parse(stored) : null;\n				})()\n			")
-                        ];
-                    case 1:
-                        uiStore = _state.sent();
-                        storeState = (uiStore === null || uiStore === void 0 ? void 0 : uiStore.state) || {};
-                        ipkName = storeState.ipkName || "a.ipk";
-                        ipkDir = storeState.ipkDir || "";
-                        sdkDir = storeState.sdkDir || "";
-                        if (!ipkDir || !deviceName) {
-                            throw new Error("IPK directory and device name are required");
-                        }
-                        ipkPath = (0,path__WEBPACK_IMPORTED_MODULE_5__.join)(ipkDir, ipkName);
-                        // Run ares-install command
-                        return [
-                            2,
-                            new Promise(function(resolve, reject) {
-                                var aresInstall = (0,child_process__WEBPACK_IMPORTED_MODULE_1__.spawn)("ares-install", [
-                                    "--device",
-                                    deviceName,
-                                    ipkPath
-                                ]);
-                                var output = "";
-                                var errorOutput = "";
-                                aresInstall.stdout.on("data", function(data) {
-                                    output += data.toString();
-                                    console.log(data.toString());
-                                });
-                                aresInstall.stderr.on("data", function(data) {
-                                    errorOutput += data.toString();
-                                    console.error(data.toString());
-                                });
-                                aresInstall.on("close", function(code) {
-                                    if (code === 0) {
-                                        resolve({
-                                            success: true,
-                                            output: output,
-                                            deviceName: deviceName
-                                        });
-                                    } else {
-                                        reject({
-                                            success: false,
-                                            error: errorOutput || "Installation failed",
-                                            code: code
-                                        });
-                                    }
-                                });
-                                aresInstall.on("error", function(error) {
-                                    reject({
-                                        success: false,
-                                        error: error.message
-                                    });
-                                });
-                            })
-                        ];
-                    case 2:
-                        error = _state.sent();
-                        console.error("Error upgrading WebOS:", error);
-                        throw error;
-                    case 3:
-                        return [
-                            2
-                        ];
+                uiStorage = uiStorageJsonString.state;
+                console.log(uiStorage);
+                ipkName = uiStorage.ipkName;
+                ipkDir = uiStorage.ipkDir;
+                deviceName = uiStorage.selectedPlayer;
+                appId = uiStorage.appId;
+                if (!ipkDir || !deviceName) {
+                    throw new Error("IPK directory and device name are required");
                 }
+                // NOTE: Use app.getAppPath() to get the app root directory
+                // This works in both dev and production
+                appPath = electron__WEBPACK_IMPORTED_MODULE_2__.app.getAppPath();
+                scriptPath = (0,path__WEBPACK_IMPORTED_MODULE_6__.resolve)(appPath, "src/scripts/upgrade-webos.sh");
+                if (!fs__WEBPACK_IMPORTED_MODULE_3___default().existsSync(scriptPath)) {
+                    throw new Error("Script not found: ".concat(scriptPath));
+                }
+                return [
+                    2,
+                    new Promise(function(resolve, reject) {
+                        var upgradeWebosScript = (0,child_process__WEBPACK_IMPORTED_MODULE_1__.spawn)("bash", [
+                            scriptPath,
+                            ipkName,
+                            ipkDir,
+                            deviceName,
+                            appId
+                        ]);
+                        var output = "";
+                        var errorOutput = "";
+                        upgradeWebosScript.stdout.on("data", function(data) {
+                            var text = data.toString();
+                            output += text;
+                            console.log(text);
+                        });
+                        upgradeWebosScript.stderr.on("data", function(data) {
+                            var text = data.toString();
+                            errorOutput += text;
+                            console.error(text);
+                        });
+                        upgradeWebosScript.on("close", function(code) {
+                            if (code === 0) {
+                                resolve({
+                                    success: true,
+                                    output: output,
+                                    deviceName: deviceName
+                                });
+                            } else {
+                                reject({
+                                    success: false,
+                                    error: errorOutput || "Upgrade failed",
+                                    code: code
+                                });
+                            }
+                        });
+                        upgradeWebosScript.on("error", function(error) {
+                            reject({
+                                success: false,
+                                error: error.message
+                            });
+                        });
+                    })
+                ];
             });
         })();
     });

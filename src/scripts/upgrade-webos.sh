@@ -30,5 +30,5 @@ LAUNCH_EXIT_CODE=$?
 
 if [ $LAUNCH_EXIT_CODE -ne 0 ]; then
   echo "Launch failed with exit code $LAUNCH_EXIT_CODE" >&2
-  exit $LAUNCH_EXIT_CODE
+  exit 
 fi

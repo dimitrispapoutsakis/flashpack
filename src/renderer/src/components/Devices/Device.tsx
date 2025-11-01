@@ -18,6 +18,7 @@ const Device = ({ device, ...rest }: IDevice) => {
 	const selectedPlayer = useUiStore((state) => state.selectedPlayer);
 	const setSelectedPlayer = useUiStore((state) => state.setSelectedPlayer);
 	const isSelected = selectedPlayer === device.name;
+	const uiStorage = JSON.parse(localStorage.getItem("ui-storage") || "{}");
 
 	const className = cn(
 		"flex flex-col items-center justify-center bg-background p-4 flex-wrap m-3",
@@ -27,7 +28,7 @@ const Device = ({ device, ...rest }: IDevice) => {
 
 	const onPointerDown = () => {
 		setSelectedPlayer(device.name);
-		// window.api.cli.upgradeWebos(device.name);
+		window.api.cli.upgradeWebos(uiStorage);
 	};
 
 	return (
