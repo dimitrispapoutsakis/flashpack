@@ -1,4 +1,6 @@
-export const routes = [
+import type { IRoute } from "@/typings";
+
+export const routes: IRoute[] = [
 	{ name: "onboarding", title: "Welcome", path: "/" },
 	{ name: "ipkName", title: "IPK Name", path: "/ipk-name" },
 	{ name: "sdkDir", title: "SDK Directory", path: "/sdk-dir" },

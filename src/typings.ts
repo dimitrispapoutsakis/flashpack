@@ -11,3 +11,9 @@ export interface IClassName {
 export interface IRestProps {
 	[key: string]: any;
 }
+
+export interface IRoute {
+	name: string;
+	title: string;
+	path: string;
+}
