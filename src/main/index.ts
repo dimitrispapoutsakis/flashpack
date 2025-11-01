@@ -1,8 +1,10 @@
 import { electronApp, is, optimizer } from "@electron-toolkit/utils";
+import { spawn } from "child_process";
 import { app, BrowserWindow, dialog, ipcMain, shell } from "electron";
 import { readdir } from "fs/promises";
 import { homedir } from "os";
 import { join, resolve } from "path";
+import { stdout } from "process";
 import icon from "../../resources/icon.png?asset";
 
 //  import { Installer } from "@webos-tools/cli/APIs";
@@ -105,6 +107,24 @@ app.whenReady().then(() => {
 		const NODE_MODULES_DIR = `${join(projectRoot, "node_modules")}/`;
 		const WEBOS_CLI_DIR = `${NODE_MODULES_DIR}@webos-tools/cli/bin/`;
 		return WEBOS_CLI_DIR;
+	});
+
+	ipcMain.handle("create-env", (event, env) => {
+		const fs = require("fs");
+		const path = require("path");
+
+		const envPath = path.join(process.cwd(), ".env");
+		let envContent = "";
+
+		if (env && typeof env === "object") {
+			envContent = Object.entries(env)
+				.map(([key, value]) => `${key.toString()}=${value.toString()}`)
+				.join("\n");
+		}
+
+		fs.writeFileSync(envPath, envContent);
+
+		return { success: true, path: envPath };
 	});
 
 	// Dialog handlers

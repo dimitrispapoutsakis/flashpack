@@ -209,6 +209,9 @@ const api = {
         getWebOsSDKDir: ()=>_electron_toolkit_preload__WEBPACK_IMPORTED_MODULE_0__.electronAPI.ipcRenderer.invoke("get-webos-sdk-dir"),
         getWebOsIPKDir: ()=>_electron_toolkit_preload__WEBPACK_IMPORTED_MODULE_0__.electronAPI.ipcRenderer.invoke("get-webos-ipk-dir")
     },
+    system: {
+        createEnv: (env)=>_electron_toolkit_preload__WEBPACK_IMPORTED_MODULE_0__.electronAPI.ipcRenderer.invoke("create-env", env)
+    },
     dialog: {
         showOpenDialog: (options)=>_electron_toolkit_preload__WEBPACK_IMPORTED_MODULE_0__.electronAPI.ipcRenderer.invoke("show-open-dialog", options)
     },
