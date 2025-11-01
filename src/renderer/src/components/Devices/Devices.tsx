@@ -5,7 +5,7 @@ import { useUiStore } from "@/renderer/src/store/uiStore";
 import Title from "../Title/Title";
 import Device from "./Device";
 
-const Devices = ({ createEnv }: { createEnv: () => void }) => {
+const Devices = () => {
 	const [devices, setDevices] = useState<any[]>([]);
 	const selectedPlayer = useUiStore((state) => state.selectedPlayer);
 	useEffect(() => {
@@ -25,12 +25,7 @@ const Devices = ({ createEnv }: { createEnv: () => void }) => {
 
 			<div className="flex flex-row">
 				{devices.map((device, index) => (
-					<Device
-						key={`${device.address}-${index}`}
-						device={device}
-						index={index}
-						createEnv={createEnv}
-					/>
+					<Device key={`${device.address}-${index}`} device={device} index={index} />
 				))}
 			</div>
 		</div>

@@ -583,8 +583,7 @@ electron__WEBPACK_IMPORTED_MODULE_2__.app.whenReady().then(function() {
         var WEBOS_CLI_DIR = "".concat(NODE_MODULES_DIR, "@webos-tools/cli/bin/");
         return WEBOS_CLI_DIR;
     });
-    electron__WEBPACK_IMPORTED_MODULE_2__.ipcMain.handle("create-env", function(event, env) {
-        console.log(env, "env");
+    electron__WEBPACK_IMPORTED_MODULE_2__.ipcMain.handle("create-env", function(_, env) {
         var envPath = path__WEBPACK_IMPORTED_MODULE_5___default().join(process.cwd(), ".env");
         var envContent = "";
         if (env && (typeof env === "undefined" ? "undefined" : _type_of(env)) === "object") {
