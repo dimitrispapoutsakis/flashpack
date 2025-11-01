@@ -9,32 +9,38 @@ import FlashButton from "./components/FlasButton/FlashButton";
 import Onboarding from "./components/Onboarding/Onboarding";
 import { TitleBar } from "./components/TitleBar";
 import { useUiStore } from "./store/uiStore";
+import { AnimatePresence, motion } from "framer-motion";
+import FadeIn from "./components/Animations/FadeIn";
+import { useLocation } from "@tanstack/react-router";
+import { routes } from "./constants/routes";
+import Dashboard from "./components/Dashboard/Dashboard";
 
 const App = ({ children }: IChildren) => {
 	const hasOnboarded = useUiStore((state) => state.hasOnboarded);
+	const setUi = useUiStore((state) => state.setUi);
+	const location = useLocation();
+	
+/* 	useEffect(() => {
+		if (location.pathname === '/dashboard') {
+			setUi('hasOnboarded', true);
+		}
+	}, [hasOnboarded, location.pathname, setUi]); */
+	console.log(hasOnboarded, location.pathname);
 
 	return (
 		<>
 			<Particles />
 			<div className="flex flex-col h-screen bg-background">
 				<TitleBar />
-				{!hasOnboarded ? (
-					<Onboarding>{children}</Onboarding>
-				) : (
-					<>
-						<Devices />
-						<div
-							className="flex-0 flex flex-row w-[50%] self-center m-10 px-8 py-8 bg-secondary justify-center items-center"
-							style={{
-								boxShadow,
-								zIndex: layouLevel.default,
-								borderRadius,
-							}}
-						>
-							<FlashButton />
-						</div>
-					</>
-				)}
+				<AnimatePresence>
+					{!hasOnboarded ? (
+						<FadeIn>
+							<Onboarding>{children}</Onboarding>
+						</FadeIn>
+					) : (
+						<Dashboard />
+					)}
+				</AnimatePresence>
 			</div>
 		</>
 	);

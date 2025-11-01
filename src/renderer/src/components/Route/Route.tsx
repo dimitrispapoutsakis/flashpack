@@ -2,9 +2,9 @@ import { createRoute, Outlet } from "@tanstack/react-router";
 import App from "../../App";
 import IpkDir from "../IpkDir/IpkDir";
 import IpkName from "../IpkName/IpkName";
-import Onboarding from "../Onboarding/Onboarding";
 import SdkDir from "../SdkDir/SdkDir";
 import Welcome from "../Welcome/Welcome";
+import Dashboard from "../Dashboard/Dashboard";
 import { rootRoute } from "./RootRoute";
 
 export const PathLessLayoutComponent = () => {
@@ -45,6 +45,12 @@ const sdkDirRoute = createRoute({
 	component: SdkDir, // The layout component
 });
 
+const dashboardRoute = createRoute({
+	getParentRoute: () => pathlessLayoutRoute,
+	path: "/dashboard",
+	component: Dashboard, // The layout component
+});
+
 export const routeTree = rootRoute.addChildren([
 	// The pathless layout route has no path, only an id
 	// So its children will be nested under the pathless layout route
@@ -54,5 +60,6 @@ export const routeTree = rootRoute.addChildren([
 		ipkNameRoute,
 		ipkDirRoute,
 		sdkDirRoute,
+		dashboardRoute,
 	]),
 ]);

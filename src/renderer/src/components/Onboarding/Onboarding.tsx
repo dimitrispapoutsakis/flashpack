@@ -10,6 +10,7 @@ import Title from "../Title/Title";
 
 const OnBoarding = ({ children }: IChildren) => {
 	const location = useLocation();
+	const setUi = useUiStore((state) => state.setUi);
 	const nextButtonDisabled = useUiStore((state) => state.nextButtonDisabled);
 	const currentRouteIndex = routes.findIndex(
 		(route) => route.path === location.pathname,
@@ -63,6 +64,11 @@ const OnBoarding = ({ children }: IChildren) => {
 									: "grayscale(0%)",
 								opacity: nextButtonDisabled ? 0.5 : 1,
 								pointerEvents: nextButtonDisabled ? "none" : "auto",
+							}}
+							onClick={() => {
+								if (nextRoute?.path === "/dashboard") {
+									setUi('hasOnboarded', true);
+								}
 							}}
 						>
 							<Button>Next</Button>
