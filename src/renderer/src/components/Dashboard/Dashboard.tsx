@@ -11,23 +11,31 @@ const Dashboard = () => {
 	const ipkDir = useUiStore((state) => state.ipkDir);
 	const sdkDir = useUiStore((state) => state.sdkDir);
 	const fileExcludes = useUiStore((state) => state.fileExcludes);
+	const appId = useUiStore((state) => state.appId);
+	const deviceName = useUiStore((state) => state.selectedPlayer);
 
-	useEffect(() => {
+	const createEnv = () => {
 		window.api.system
 			.createEnv({
 				ipkName,
 				ipkDir,
 				sdkDir,
 				fileExcludes,
+				appId,
+				deviceName,
 			})
 			.then((env: any) => {
 				console.log(env);
 			});
-	}, [ipkName, ipkDir, sdkDir, fileExcludes]);
+	};
+
+	useEffect(() => {
+		createEnv();
+	}, []);
 
 	return (
 		<FadeIn>
-			<Devices />
+			<Devices createEnv={createEnv} />
 			<div
 				className="flex-0 flex flex-row w-[50%] self-center m-10 px-8 py-8 bg-secondary justify-center items-center"
 				style={{

@@ -46,6 +46,8 @@ const api = {
 				});
 			});
 		},
+		upgradeWebos: (deviceName: string) =>
+			electronAPI.ipcRenderer.invoke("upgrade-webos", deviceName),
 	},
 };
 

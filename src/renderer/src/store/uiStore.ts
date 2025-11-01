@@ -11,6 +11,7 @@ interface IUiState {
 	ipkDir: string;
 	sdkDir: string;
 	fileExcludes: string[];
+	appId: string;
 	nextButtonDisabled: boolean;
 	setUi: (key: TAppSettings, value: any) => void;
 }
@@ -25,6 +26,7 @@ export const useUiStore = create<IUiState>()(
 			ipkName: "a.ipk",
 			ipkDir: "",
 			sdkDir: "",
+			appId: "com.lg.app.signage.dev",
 			nextButtonDisabled: false,
 			fileExcludes: FILE_EXCLUDES,
 			setSelectedPlayer: (player) =>

@@ -5,6 +5,10 @@ var __webpack_modules__ = ({
 module.exports = __webpack_require__.p + "static/image/icon.943b7a7d.png";
 
 }),
+"child_process": (function (module) {
+module.exports = require("child_process");
+
+}),
 "electron": (function (module) {
 module.exports = require("electron");
 
@@ -241,15 +245,17 @@ var __webpack_exports__ = {};
 (() => {
 __webpack_require__.r(__webpack_exports__);
 /* ESM import */var _electron_toolkit_utils__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__("./node_modules/@electron-toolkit/utils/dist/index.mjs");
-/* ESM import */var electron__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__("electron");
-/* ESM import */var electron__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(electron__WEBPACK_IMPORTED_MODULE_1__);
-/* ESM import */var fs_promises__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__("fs/promises");
-/* ESM import */var fs_promises__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(fs_promises__WEBPACK_IMPORTED_MODULE_2__);
-/* ESM import */var os__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__("os");
-/* ESM import */var os__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(os__WEBPACK_IMPORTED_MODULE_3__);
-/* ESM import */var path__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__("path");
-/* ESM import */var path__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(path__WEBPACK_IMPORTED_MODULE_4__);
-/* ESM import */var _resources_icon_png_asset__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__("./resources/icon.png?asset");
+/* ESM import */var child_process__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__("child_process");
+/* ESM import */var child_process__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(child_process__WEBPACK_IMPORTED_MODULE_1__);
+/* ESM import */var electron__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__("electron");
+/* ESM import */var electron__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(electron__WEBPACK_IMPORTED_MODULE_2__);
+/* ESM import */var fs_promises__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__("fs/promises");
+/* ESM import */var fs_promises__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(fs_promises__WEBPACK_IMPORTED_MODULE_3__);
+/* ESM import */var os__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__("os");
+/* ESM import */var os__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(os__WEBPACK_IMPORTED_MODULE_4__);
+/* ESM import */var path__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__("path");
+/* ESM import */var path__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(path__WEBPACK_IMPORTED_MODULE_5__);
+/* ESM import */var _resources_icon_png_asset__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__("./resources/icon.png?asset");
 function _array_like_to_array(arr, len) {
     if (len == null || len > arr.length) len = arr.length;
     for(var i = 0, arr2 = new Array(len); i < len; i++)arr2[i] = arr[i];
@@ -478,23 +484,24 @@ function _ts_generator(thisArg, body) {
 
 
 
+
 //  import { Installer } from "@webos-tools/cli/APIs";
 // console.log(Installer);
 function createWindow() {
     /* 	Installer.list().then((res) => {
 			console.log(res);
 		});  */ // Create the browser window.
-    var mainWindow = new electron__WEBPACK_IMPORTED_MODULE_1__.BrowserWindow(_object_spread_props(_object_spread({
+    var mainWindow = new electron__WEBPACK_IMPORTED_MODULE_2__.BrowserWindow(_object_spread_props(_object_spread({
         width: 1115,
         height: 850,
         show: false,
         autoHideMenuBar: true,
         frame: false
     }, process.platform === "linux" ? {
-        icon: _resources_icon_png_asset__WEBPACK_IMPORTED_MODULE_5__
+        icon: _resources_icon_png_asset__WEBPACK_IMPORTED_MODULE_6__
     } : {}), {
         webPreferences: {
-            preload: (0,path__WEBPACK_IMPORTED_MODULE_4__.join)(__dirname, "../preload/index.js"),
+            preload: (0,path__WEBPACK_IMPORTED_MODULE_5__.join)(__dirname, "../preload/index.js"),
             sandbox: false,
             contextIsolation: true
         },
@@ -505,7 +512,7 @@ function createWindow() {
         mainWindow.show();
     });
     mainWindow.webContents.setWindowOpenHandler(function(details) {
-        electron__WEBPACK_IMPORTED_MODULE_1__.shell.openExternal(details.url);
+        electron__WEBPACK_IMPORTED_MODULE_2__.shell.openExternal(details.url);
         return {
             action: "deny"
         };
@@ -515,23 +522,23 @@ function createWindow() {
     if (_electron_toolkit_utils__WEBPACK_IMPORTED_MODULE_0__.is.dev && process.env["ELECTRON_RENDERER_URL"]) {
         mainWindow.loadURL(process.env["ELECTRON_RENDERER_URL"]);
     } else {
-        mainWindow.loadFile((0,path__WEBPACK_IMPORTED_MODULE_4__.join)(__dirname, "../renderer/index.html"));
+        mainWindow.loadFile((0,path__WEBPACK_IMPORTED_MODULE_5__.join)(__dirname, "../renderer/index.html"));
     }
 }
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
-electron__WEBPACK_IMPORTED_MODULE_1__.app.whenReady().then(function() {
+electron__WEBPACK_IMPORTED_MODULE_2__.app.whenReady().then(function() {
     // Set app user model id for windows
     _electron_toolkit_utils__WEBPACK_IMPORTED_MODULE_0__.electronApp.setAppUserModelId("com.electron");
     // Default open or close DevTools by F12 in development
     // and ignore CommandOrControl + R in production.
     // see https://github.com/alex8088/electron-toolkit/tree/master/packages/utils
-    electron__WEBPACK_IMPORTED_MODULE_1__.app.on("browser-window-created", function(_, window) {
+    electron__WEBPACK_IMPORTED_MODULE_2__.app.on("browser-window-created", function(_, window) {
         _electron_toolkit_utils__WEBPACK_IMPORTED_MODULE_0__.optimizer.watchWindowShortcuts(window);
     });
     // IPC test
-    electron__WEBPACK_IMPORTED_MODULE_1__.ipcMain.on("ping", function(event) {
+    electron__WEBPACK_IMPORTED_MODULE_2__.ipcMain.on("ping", function(event) {
         event.reply("pong", {
             message: "copy that.",
             time: new Date().getTime()
@@ -539,40 +546,40 @@ electron__WEBPACK_IMPORTED_MODULE_1__.app.whenReady().then(function() {
         console.log("pong");
     });
     // Window controls
-    electron__WEBPACK_IMPORTED_MODULE_1__.ipcMain.on("window-minimize", function(event) {
-        var window = electron__WEBPACK_IMPORTED_MODULE_1__.BrowserWindow.fromWebContents(event.sender);
+    electron__WEBPACK_IMPORTED_MODULE_2__.ipcMain.on("window-minimize", function(event) {
+        var window = electron__WEBPACK_IMPORTED_MODULE_2__.BrowserWindow.fromWebContents(event.sender);
         console.log(window, "here");
         window === null || window === void 0 ? void 0 : window.minimize();
     });
-    electron__WEBPACK_IMPORTED_MODULE_1__.ipcMain.on("window-maximize", function(event) {
-        var window = electron__WEBPACK_IMPORTED_MODULE_1__.BrowserWindow.fromWebContents(event.sender);
+    electron__WEBPACK_IMPORTED_MODULE_2__.ipcMain.on("window-maximize", function(event) {
+        var window = electron__WEBPACK_IMPORTED_MODULE_2__.BrowserWindow.fromWebContents(event.sender);
         if (window === null || window === void 0 ? void 0 : window.isMaximized()) {
             window.unmaximize();
         } else {
             window === null || window === void 0 ? void 0 : window.maximize();
         }
     });
-    electron__WEBPACK_IMPORTED_MODULE_1__.ipcMain.on("window-close", function(event) {
-        var window = electron__WEBPACK_IMPORTED_MODULE_1__.BrowserWindow.fromWebContents(event.sender);
+    electron__WEBPACK_IMPORTED_MODULE_2__.ipcMain.on("window-close", function(event) {
+        var window = electron__WEBPACK_IMPORTED_MODULE_2__.BrowserWindow.fromWebContents(event.sender);
         window === null || window === void 0 ? void 0 : window.close();
     });
     // OS utilities
-    electron__WEBPACK_IMPORTED_MODULE_1__.ipcMain.handle("get-home-dir", function() {
-        return (0,os__WEBPACK_IMPORTED_MODULE_3__.homedir)();
+    electron__WEBPACK_IMPORTED_MODULE_2__.ipcMain.handle("get-home-dir", function() {
+        return (0,os__WEBPACK_IMPORTED_MODULE_4__.homedir)();
     });
-    electron__WEBPACK_IMPORTED_MODULE_1__.ipcMain.handle("get-hard-drive-dir", function() {
-        return (0,fs_promises__WEBPACK_IMPORTED_MODULE_2__.readdir)((0,os__WEBPACK_IMPORTED_MODULE_3__.homedir)());
+    electron__WEBPACK_IMPORTED_MODULE_2__.ipcMain.handle("get-hard-drive-dir", function() {
+        return (0,fs_promises__WEBPACK_IMPORTED_MODULE_3__.readdir)((0,os__WEBPACK_IMPORTED_MODULE_4__.homedir)());
     });
-    electron__WEBPACK_IMPORTED_MODULE_1__.ipcMain.handle("get-webos-ipk-dir", function() {
-        return (0,path__WEBPACK_IMPORTED_MODULE_4__.join)((0,os__WEBPACK_IMPORTED_MODULE_3__.homedir)(), "dev", "webos", "ipks");
+    electron__WEBPACK_IMPORTED_MODULE_2__.ipcMain.handle("get-webos-ipk-dir", function() {
+        return (0,path__WEBPACK_IMPORTED_MODULE_5__.join)((0,os__WEBPACK_IMPORTED_MODULE_4__.homedir)(), "dev", "webos", "ipks");
     });
-    electron__WEBPACK_IMPORTED_MODULE_1__.ipcMain.handle("get-webos-sdk-dir", function() {
-        var projectRoot = (0,path__WEBPACK_IMPORTED_MODULE_4__.resolve)(__dirname, "../..");
-        var NODE_MODULES_DIR = "".concat((0,path__WEBPACK_IMPORTED_MODULE_4__.join)(projectRoot, "node_modules"), "/");
+    electron__WEBPACK_IMPORTED_MODULE_2__.ipcMain.handle("get-webos-sdk-dir", function() {
+        var projectRoot = (0,path__WEBPACK_IMPORTED_MODULE_5__.resolve)(__dirname, "../..");
+        var NODE_MODULES_DIR = "".concat((0,path__WEBPACK_IMPORTED_MODULE_5__.join)(projectRoot, "node_modules"), "/");
         var WEBOS_CLI_DIR = "".concat(NODE_MODULES_DIR, "@webos-tools/cli/bin/");
         return WEBOS_CLI_DIR;
     });
-    electron__WEBPACK_IMPORTED_MODULE_1__.ipcMain.handle("create-env", function(event, env) {
+    electron__WEBPACK_IMPORTED_MODULE_2__.ipcMain.handle("create-env", function(event, env) {
         var fs = __webpack_require__("fs");
         var path = __webpack_require__("path");
         var envPath = path.join(process.cwd(), ".env");
@@ -580,7 +587,7 @@ electron__WEBPACK_IMPORTED_MODULE_1__.app.whenReady().then(function() {
         if (env && (typeof env === "undefined" ? "undefined" : _type_of(env)) === "object") {
             envContent = Object.entries(env).map(function(param) {
                 var _param = _sliced_to_array(param, 2), key = _param[0], value = _param[1];
-                return "".concat(key.toString(), "=").concat(value.toString());
+                return "".concat(key.toString(), "=").concat(String(value !== null && value !== void 0 ? value : ""));
             }).join("\n");
         }
         fs.writeFileSync(envPath, envContent);
@@ -589,20 +596,100 @@ electron__WEBPACK_IMPORTED_MODULE_1__.app.whenReady().then(function() {
             path: envPath
         };
     });
+    electron__WEBPACK_IMPORTED_MODULE_2__.ipcMain.handle("upgrade-webos", function(event, deviceName) {
+        return _async_to_generator(function() {
+            var uiStore, storeState, ipkName, ipkDir, sdkDir, ipkPath, error;
+            return _ts_generator(this, function(_state) {
+                switch(_state.label){
+                    case 0:
+                        _state.trys.push([
+                            0,
+                            2,
+                            ,
+                            3
+                        ]);
+                        return [
+                            4,
+                            event.sender.executeJavaScript("\n				(() => {\n					const stored = localStorage.getItem('ui-storage');\n					return stored ? JSON.parse(stored) : null;\n				})()\n			")
+                        ];
+                    case 1:
+                        uiStore = _state.sent();
+                        storeState = (uiStore === null || uiStore === void 0 ? void 0 : uiStore.state) || {};
+                        ipkName = storeState.ipkName || "a.ipk";
+                        ipkDir = storeState.ipkDir || "";
+                        sdkDir = storeState.sdkDir || "";
+                        if (!ipkDir || !deviceName) {
+                            throw new Error("IPK directory and device name are required");
+                        }
+                        ipkPath = (0,path__WEBPACK_IMPORTED_MODULE_5__.join)(ipkDir, ipkName);
+                        // Run ares-install command
+                        return [
+                            2,
+                            new Promise(function(resolve, reject) {
+                                var aresInstall = (0,child_process__WEBPACK_IMPORTED_MODULE_1__.spawn)("ares-install", [
+                                    "--device",
+                                    deviceName,
+                                    ipkPath
+                                ]);
+                                var output = "";
+                                var errorOutput = "";
+                                aresInstall.stdout.on("data", function(data) {
+                                    output += data.toString();
+                                    console.log(data.toString());
+                                });
+                                aresInstall.stderr.on("data", function(data) {
+                                    errorOutput += data.toString();
+                                    console.error(data.toString());
+                                });
+                                aresInstall.on("close", function(code) {
+                                    if (code === 0) {
+                                        resolve({
+                                            success: true,
+                                            output: output,
+                                            deviceName: deviceName
+                                        });
+                                    } else {
+                                        reject({
+                                            success: false,
+                                            error: errorOutput || "Installation failed",
+                                            code: code
+                                        });
+                                    }
+                                });
+                                aresInstall.on("error", function(error) {
+                                    reject({
+                                        success: false,
+                                        error: error.message
+                                    });
+                                });
+                            })
+                        ];
+                    case 2:
+                        error = _state.sent();
+                        console.error("Error upgrading WebOS:", error);
+                        throw error;
+                    case 3:
+                        return [
+                            2
+                        ];
+                }
+            });
+        })();
+    });
     // Dialog handlers
-    electron__WEBPACK_IMPORTED_MODULE_1__.ipcMain.handle("show-open-dialog", function(event, options) {
+    electron__WEBPACK_IMPORTED_MODULE_2__.ipcMain.handle("show-open-dialog", function(event, options) {
         return _async_to_generator(function() {
             var window, result;
             return _ts_generator(this, function(_state) {
                 switch(_state.label){
                     case 0:
-                        window = electron__WEBPACK_IMPORTED_MODULE_1__.BrowserWindow.fromWebContents(event.sender);
+                        window = electron__WEBPACK_IMPORTED_MODULE_2__.BrowserWindow.fromWebContents(event.sender);
                         if (!window) {
                             throw new Error("Window not found");
                         }
                         return [
                             4,
-                            electron__WEBPACK_IMPORTED_MODULE_1__.dialog.showOpenDialog(window, options)
+                            electron__WEBPACK_IMPORTED_MODULE_2__.dialog.showOpenDialog(window, options)
                         ];
                     case 1:
                         result = _state.sent();
@@ -615,18 +702,18 @@ electron__WEBPACK_IMPORTED_MODULE_1__.app.whenReady().then(function() {
         })();
     });
     createWindow();
-    electron__WEBPACK_IMPORTED_MODULE_1__.app.on("activate", function() {
+    electron__WEBPACK_IMPORTED_MODULE_2__.app.on("activate", function() {
         // On macOS it's common to re-create a window in the app when the
         // dock icon is clicked and there are no other windows open.
-        if (electron__WEBPACK_IMPORTED_MODULE_1__.BrowserWindow.getAllWindows().length === 0) createWindow();
+        if (electron__WEBPACK_IMPORTED_MODULE_2__.BrowserWindow.getAllWindows().length === 0) createWindow();
     });
 });
 // Quit when all windows are closed, except on macOS. There, it's common
 // for applications and their menu bar to stay active until the user quits
 // explicitly with Cmd + Q.
-electron__WEBPACK_IMPORTED_MODULE_1__.app.on("window-all-closed", function() {
+electron__WEBPACK_IMPORTED_MODULE_2__.app.on("window-all-closed", function() {
     if (process.platform !== "darwin") {
-        electron__WEBPACK_IMPORTED_MODULE_1__.app.quit();
+        electron__WEBPACK_IMPORTED_MODULE_2__.app.quit();
     }
 }); // In this file you can include the rest of your app"s specific main process
  // code. You can also put them in separate files and require them here.

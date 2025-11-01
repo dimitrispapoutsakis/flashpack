@@ -4,7 +4,6 @@ import { app, BrowserWindow, dialog, ipcMain, shell } from "electron";
 import { readdir } from "fs/promises";
 import { homedir } from "os";
 import { join, resolve } from "path";
-import { stdout } from "process";
 import icon from "../../resources/icon.png?asset";
 
 //  import { Installer } from "@webos-tools/cli/APIs";
@@ -118,13 +117,77 @@ app.whenReady().then(() => {
 
 		if (env && typeof env === "object") {
 			envContent = Object.entries(env)
-				.map(([key, value]) => `${key.toString()}=${value.toString()}`)
+				.map(([key, value]) => `${key.toString()}=${String(value ?? "")}`)
 				.join("\n");
 		}
 
 		fs.writeFileSync(envPath, envContent);
 
 		return { success: true, path: envPath };
+	});
+
+	ipcMain.handle("upgrade-webos", async (event, deviceName: string) => {
+		try {
+			// Get UI store values from renderer
+			const uiStore = await event.sender.executeJavaScript(`
+				(() => {
+					const stored = localStorage.getItem('ui-storage');
+					return stored ? JSON.parse(stored) : null;
+				})()
+			`);
+
+			const storeState = uiStore?.state || {};
+			const ipkName = storeState.ipkName || "a.ipk";
+			const ipkDir = storeState.ipkDir || "";
+			const sdkDir = storeState.sdkDir || "";
+
+			if (!ipkDir || !deviceName) {
+				throw new Error("IPK directory and device name are required");
+			}
+
+			const ipkPath = join(ipkDir, ipkName);
+
+			// Run ares-install command
+			return new Promise((resolve, reject) => {
+				const aresInstall = spawn("ares-install", [
+					"--device",
+					deviceName,
+					ipkPath,
+				]);
+
+				let output = "";
+				let errorOutput = "";
+
+				aresInstall.stdout.on("data", (data) => {
+					output += data.toString();
+					console.log(data.toString());
+				});
+
+				aresInstall.stderr.on("data", (data) => {
+					errorOutput += data.toString();
+					console.error(data.toString());
+				});
+
+				aresInstall.on("close", (code) => {
+					if (code === 0) {
+						resolve({ success: true, output, deviceName });
+					} else {
+						reject({
+							success: false,
+							error: errorOutput || "Installation failed",
+							code,
+						});
+					}
+				});
+
+				aresInstall.on("error", (error) => {
+					reject({ success: false, error: error.message });
+				});
+			});
+		} catch (error) {
+			console.error("Error upgrading WebOS:", error);
+			throw error;
+		}
 	});
 
 	// Dialog handlers

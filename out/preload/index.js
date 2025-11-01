@@ -240,7 +240,8 @@ const api = {
                     resolve(devices);
                 });
             });
-        }
+        },
+        upgradeWebos: (deviceName)=>_electron_toolkit_preload__WEBPACK_IMPORTED_MODULE_0__.electronAPI.ipcRenderer.invoke("upgrade-webos", deviceName)
     }
 };
 // Use `contextBridge` APIs to expose Electron APIs to

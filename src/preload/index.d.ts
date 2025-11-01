@@ -11,6 +11,7 @@ declare global {
 			};
 			cli: {
 				Installer: ReturnType<typeof Installer>;
+				upgradeWebos: (deviceName: string) => Promise<any>;
 			};
 			window: {
 				minimize: () => void;

@@ -14,7 +14,7 @@ interface IDevice extends IRestProps {
 	};
 }
 
-const Device = ({ device, ...rest }: IDevice) => {
+const Device = ({ device, createEnv, ...rest }: IDevice) => {
 	const selectedPlayer = useUiStore((state) => state.selectedPlayer);
 	const setSelectedPlayer = useUiStore((state) => state.setSelectedPlayer);
 	const isSelected = selectedPlayer === device.name;
@@ -25,12 +25,14 @@ const Device = ({ device, ...rest }: IDevice) => {
 		isSelected && styles.active,
 	);
 
+	const onPointerDown = () => {
+		setSelectedPlayer(device.name);
+		createEnv();
+		window.api.cli.upgradeWebos(device.name);
+	};
+
 	return (
-		<div
-			className={className}
-			{...rest}
-			onPointerDown={() => setSelectedPlayer(device.name)}
-		>
+		<div className={className} {...rest} onPointerDown={onPointerDown}>
 			<Icon>
 				<SmartTvIcon />
 			</Icon>
