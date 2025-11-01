@@ -189,10 +189,10 @@ var __webpack_exports__ = {};
 (() => {
 __webpack_require__.r(__webpack_exports__);
 /* ESM import */var _electron_toolkit_preload__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__("./node_modules/@electron-toolkit/preload/dist/index.mjs");
-/* ESM import */var electron__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__("electron");
-/* ESM import */var electron__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(electron__WEBPACK_IMPORTED_MODULE_1__);
-/* ESM import */var child_process__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__("child_process");
-/* ESM import */var child_process__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(child_process__WEBPACK_IMPORTED_MODULE_2__);
+/* ESM import */var child_process__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__("child_process");
+/* ESM import */var child_process__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(child_process__WEBPACK_IMPORTED_MODULE_1__);
+/* ESM import */var electron__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__("electron");
+/* ESM import */var electron__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(electron__WEBPACK_IMPORTED_MODULE_2__);
 
 
 
@@ -205,24 +205,24 @@ const api = {
     },
     cli: {
         getDevices: ()=>{
-            const aresCliCmd = (0,child_process__WEBPACK_IMPORTED_MODULE_2__.spawn)('ares-setup-device', [
-                '--list'
+            const aresCliCmd = (0,child_process__WEBPACK_IMPORTED_MODULE_1__.spawn)("ares-setup-device", [
+                "--list"
             ]);
             const excludedDevices = [
-                'name',
-                '------------------',
-                'emulator',
-                ''
+                "name",
+                "------------------",
+                "emulator",
+                ""
             ];
             let devices = [];
             return new Promise((resolve, reject)=>{
-                aresCliCmd.stdout.on('data', (data)=>{
+                aresCliCmd.stdout.on("data", (data)=>{
                     console.log(data.toString());
-                    devices = data.toString().split('\n').map((line)=>line.trim()).map((device)=>{
+                    devices = data.toString().split("\n").map((line)=>line.trim()).map((device)=>{
                         return {
-                            name: device.split(' ')[0],
-                            deviceInfo: device.split(' ')[3],
-                            ssh: device.split(' ')[5]
+                            name: device.split(" ")[0],
+                            deviceInfo: device.split(" ")[3],
+                            ssh: device.split(" ")[5]
                         };
                     }).filter((device)=>!excludedDevices.includes(device.name));
                     resolve(devices);
@@ -236,8 +236,8 @@ const api = {
 // just add to the DOM global.
 if (process.contextIsolated) {
     try {
-        electron__WEBPACK_IMPORTED_MODULE_1__.contextBridge.exposeInMainWorld("electron", _electron_toolkit_preload__WEBPACK_IMPORTED_MODULE_0__.electronAPI);
-        electron__WEBPACK_IMPORTED_MODULE_1__.contextBridge.exposeInMainWorld("api", api);
+        electron__WEBPACK_IMPORTED_MODULE_2__.contextBridge.exposeInMainWorld("electron", _electron_toolkit_preload__WEBPACK_IMPORTED_MODULE_0__.electronAPI);
+        electron__WEBPACK_IMPORTED_MODULE_2__.contextBridge.exposeInMainWorld("api", api);
     } catch (error) {
         console.error(error);
     }

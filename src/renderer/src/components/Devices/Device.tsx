@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Ink from "react-ink";
 import { cn } from "@/lib/utils";
+import { useUiStore } from "@/renderer/src/store/uiStore";
 import type { IRestProps } from "@/typings";
 import Icon from "../Icons/icon/Icon";
 import SmartTvIcon from "../Icons/icon/SmartTv";
@@ -14,23 +15,25 @@ interface IDevice extends IRestProps {
 }
 
 const Device = ({ device, ...rest }: IDevice) => {
-	const [selected, setSelected] = useState(false);
+	const selectedPlayer = useUiStore((state) => state.selectedPlayer);
+	const setSelectedPlayer = useUiStore((state) => state.setSelectedPlayer);
+	const isSelected = selectedPlayer === device.name;
+
 	const className = cn(
 		"flex flex-col items-center justify-center bg-background p-4 flex-wrap m-3",
 		styles.root,
-		selected && styles.active,
+		isSelected && styles.active,
 	);
 
-	const handleClick = (e: React.KeyboardEvent<HTMLDivElement>) => {
-		setSelected(!selected);
-	};
-
 	return (
-		<div className={className} {...rest} onKeyDown={handleClick}>
+		<div
+			className={className}
+			{...rest}
+			onPointerDown={() => setSelectedPlayer(device.name)}
+		>
 			<Icon>
 				<SmartTvIcon />
 			</Icon>
-			{/** biome-ignore lint/a11y/noStaticElementInteractions: <explanation> */}
 			<span>{device.name}</span>
 			<Ink />
 		</div>
