@@ -15,14 +15,14 @@ export const PathLessLayoutComponent = () => {
 
 const pathlessLayoutRoute = createRoute({
 	getParentRoute: () => rootRoute,
-	path: "/",
+	id: "pathlessLayoutRoute",
 	component: PathLessLayoutComponent,
-});
+});	
 
 const welcomeRoute = createRoute({
 	getParentRoute: () => pathlessLayoutRoute,
-	path: "/welcome",
-	component: Welcome, // The layout component
+	path: "/",
+	component: Welcome,
 });
 
 const ipkNameRoute = createRoute({

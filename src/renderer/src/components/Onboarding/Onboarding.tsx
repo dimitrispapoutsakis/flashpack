@@ -23,7 +23,6 @@ const OnBoarding = ({ children }: IChildren) => {
 		"justify-start align-start",
 		isFirstRoute ? "opacity-[0.5]" : "opacity-[1]",
 	);
-	console.log(nextRoute);
 
 	return (
 		<div className="flex justify-center flex-col items-center h-screen">
