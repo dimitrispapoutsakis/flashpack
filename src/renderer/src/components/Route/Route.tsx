@@ -17,7 +17,7 @@ const pathlessLayoutRoute = createRoute({
 	getParentRoute: () => rootRoute,
 	id: "pathlessLayoutRoute",
 	component: PathLessLayoutComponent,
-});	
+});
 
 const welcomeRoute = createRoute({
 	getParentRoute: () => pathlessLayoutRoute,
