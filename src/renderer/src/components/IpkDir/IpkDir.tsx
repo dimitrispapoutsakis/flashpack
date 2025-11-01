@@ -12,9 +12,11 @@ const IpkDir = () => {
 	}, [setUi, ipkDir]);
 
 	useEffect(() => {
-		window.api.os.getWebOsIPKDir().then((webosSDKDir) => {
-			setUi("ipkDir", webosSDKDir);
-		});
+		if (!ipkDir.length) {
+			window.api.os.getWebOsIPKDir().then((webosSDKDir) => {
+				setUi("ipkDir", webosSDKDir);
+			});
+		}
 	}, [setUi]);
 
 	return (
