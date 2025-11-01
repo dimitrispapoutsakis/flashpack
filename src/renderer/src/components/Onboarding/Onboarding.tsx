@@ -2,12 +2,13 @@ import { Link, useLocation } from "@tanstack/react-router";
 import clamp from "clamp";
 import { Button } from "@/components/animate-ui/components/buttons/button";
 import { cn } from "@/lib/utils";
+import type { IChildren } from "@/typings";
 import { routes } from "../../constants/routes";
 import Paper from "../Paper/Paper";
 import Stepper from "../Stepper/Stepper";
 import Title from "../Title/Title";
 
-const OnBoarding = () => {
+const OnBoarding = ({ children }: IChildren) => {
 	const location = useLocation();
 	const currentRouteIndex = routes.findIndex(
 		(route) => route.path === location.pathname,
@@ -30,9 +31,11 @@ const OnBoarding = () => {
 				<div className="flex flex-row justify-center items-center">
 					<Title title={currentRoute?.title || ""} />
 				</div>
-				<div className="m-4">
+				<div className="mt-6 mb-3">
 					<Stepper />
 				</div>
+
+				<div className="m-4 flex justify-center items-center">{children}</div>
 
 				<div className="flex flex-row justify-between items-center">
 					<div className="flex justify-start align-start">

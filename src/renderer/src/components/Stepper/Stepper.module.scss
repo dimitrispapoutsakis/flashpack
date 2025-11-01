@@ -29,6 +29,7 @@
   border-radius: 50%;
   background-color: gray;
   z-index: 100;
+  transition: all 0.25s vars.$ease-buttery;
 }
 
 .active {

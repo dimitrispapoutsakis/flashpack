@@ -1,16 +1,18 @@
+import { useLocation } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { cn } from "@/lib/utils";
 import { routes } from "@/renderer/src/constants/routes";
 import styles from "./Stepper.module.scss";
 
 const Stepper = () => {
+	const location = useLocation();
 	const [currentStep, setCurrentStep] = useState(0);
 
 	useEffect(() => {
 		setCurrentStep(
-			routes.findIndex((route) => route.path === window.location.pathname),
+			routes.findIndex((route) => route.path === location.pathname),
 		);
-	}, []);
+	}, [location.pathname]);
 
 	return (
 		<div className="flex flex-col justify-center items-center">

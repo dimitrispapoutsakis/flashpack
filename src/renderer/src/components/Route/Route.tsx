@@ -1,6 +1,8 @@
 import { createRoute, Outlet } from "@tanstack/react-router";
 import App from "../../App";
+import IpkName from "../IpkName/IpkName";
 import Onboarding from "../Onboarding/Onboarding";
+import Welcome from "../Welcome/Welcome";
 import { rootRoute } from "./RootRoute";
 
 export const PathLessLayoutComponent = () => {
@@ -17,20 +19,20 @@ const pathlessLayoutRoute = createRoute({
 	component: PathLessLayoutComponent,
 });
 
-const onboardingRoute = createRoute({
-	getParentRoute: () => rootRoute,
-	path: "/onboarding",
-	component: Onboarding, // The layout component
+const welcomeRoute = createRoute({
+	getParentRoute: () => pathlessLayoutRoute,
+	path: "/welcome",
+	component: Welcome, // The layout component
 });
-/* 
+
 const ipkNameRoute = createRoute({
-	getParentRoute: () => rootRoute,
-	path: "/onboarding",
-	component: Onboarding, // The layout component
+	getParentRoute: () => pathlessLayoutRoute,
+	path: "/ipk-name",
+	component: IpkName, // The layout component
 });
- */
+
 export const routeTree = rootRoute.addChildren([
 	// The pathless layout route has no path, only an id
 	// So its children will be nested under the pathless layout route
-	pathlessLayoutRoute.addChildren([onboardingRoute]),
+	pathlessLayoutRoute.addChildren([welcomeRoute, ipkNameRoute]),
 ]);

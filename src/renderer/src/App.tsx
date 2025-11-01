@@ -19,10 +19,7 @@ const App = ({ children }: IChildren) => {
 			<div className="flex flex-col h-screen bg-background">
 				<TitleBar />
 				{!hasOnboarded ? (
-					<>
-						<Onboarding />
-						{children}
-					</>
+					<Onboarding>{children}</Onboarding>
 				) : (
 					<>
 						<Devices />
