@@ -7,3 +7,5 @@ $border-radius: 20px;
 
 // Cubic-bezier for buttery smooth animation
 $ease-buttery: cubic-bezier(0.4, 0, 0.2, 1);
+
+$glow-box-shadow: 0 0 12px 4px rgba(255, 224, 48, 0.7), 0 0 2px 1px $primary;
