@@ -534,13 +534,12 @@ electron__WEBPACK_IMPORTED_MODULE_2__.app.whenReady().then(function() {
     });
     electron__WEBPACK_IMPORTED_MODULE_2__.ipcMain.handle("upgrade-webos", function(_, uiStorageJsonString) {
         return _async_to_generator(function() {
-            var uiStorage, ipkName, ipkDir, deviceName, appId, appPath, scriptPath;
+            var _JSON_parse, uiStorage, ipkName, ipkDir, deviceName, appId, appPath, scriptPath;
             return _ts_generator(this, function(_state) {
-                uiStorage = uiStorageJsonString.state;
-                console.log(uiStorage);
+                _JSON_parse = JSON.parse(uiStorageJsonString), uiStorage = _JSON_parse.state;
                 ipkName = uiStorage.ipkName;
                 ipkDir = uiStorage.ipkDir;
-                deviceName = uiStorage.selectedPlayer;
+                deviceName = uiStorage.deviceName;
                 appId = uiStorage.appId;
                 if (!ipkDir || !deviceName) {
                     throw new Error("IPK directory and device name are required");

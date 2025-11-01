@@ -16,19 +16,33 @@ interface IDevice extends IRestProps {
 
 const Device = ({ device, ...rest }: IDevice) => {
 	const selectedPlayer = useUiStore((state) => state.selectedPlayer);
-	const setSelectedPlayer = useUiStore((state) => state.setSelectedPlayer);
 	const isSelected = selectedPlayer === device.name;
-	const uiStorage = JSON.parse(localStorage.getItem("ui-storage") || "{}");
-
+	const ipkName = useUiStore((state) => state.ipkName);
+	const ipkDir = useUiStore((state) => state.ipkDir);
+	const sdkDir = useUiStore((state) => state.sdkDir);
+	const fileExcludes = useUiStore((state) => state.fileExcludes);
+	const appId = useUiStore((state) => state.appId);
+	const deviceName = useUiStore((state) => state.selectedPlayer);
+	const setUi = useUiStore((state) => state.setUi);
 	const className = cn(
 		"flex flex-col items-center justify-center bg-background p-4 flex-wrap m-3",
 		styles.root,
 		isSelected && styles.active,
 	);
+	const uiStorage = {
+		ipkName,
+		ipkDir,
+		sdkDir,
+		fileExcludes,
+		appId,
+		deviceName,
+	};
 
 	const onPointerDown = () => {
-		setSelectedPlayer(device.name);
-		window.api.cli.upgradeWebos(uiStorage);
+		setUi("selectedPlayer", device.name);
+		window.api.cli.upgradeWebos(
+			JSON.stringify({ state: { ...uiStorage, deviceName: device.name } }),
+		);
 	};
 
 	return (

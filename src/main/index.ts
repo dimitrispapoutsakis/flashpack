@@ -110,11 +110,11 @@ app.whenReady().then(() => {
 	});
 
 	ipcMain.handle("upgrade-webos", async (_, uiStorageJsonString: any) => {
-		const { state: uiStorage } = uiStorageJsonString;
-		console.log(uiStorage);
+		const { state: uiStorage } = JSON.parse(uiStorageJsonString);
+
 		const ipkName = uiStorage.ipkName;
 		const ipkDir = uiStorage.ipkDir;
-		const deviceName = uiStorage.selectedPlayer;
+		const deviceName = uiStorage.deviceName;
 		const appId = uiStorage.appId;
 
 		if (!ipkDir || !deviceName) {
